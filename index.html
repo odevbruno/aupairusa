@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Au Pair USA - Prepare-se com quem vive o programa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .dot-pattern {
+            background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-white antialiased">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-pink-500 rounded-lg"></div>
+                    <span class="font-bold text-xl">Au Pair USA</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#sobre" class="text-sm text-gray-600 hover:text-gray-900 transition">Sobre</a>
+                    <a href="#conteudo" class="text-sm text-gray-600 hover:text-gray-900 transition">Conteúdo</a>
+                    <a href="#faq" class="text-sm text-gray-600 hover:text-gray-900 transition">FAQ</a>
+                    <a href="#cta" class="px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition">Começar agora</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 dot-pattern opacity-40"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-violet-50 border border-violet-200 rounded-full mb-6">
+                    <span class="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></span>
+                    <span class="text-sm font-medium text-violet-700">Criado por quem vive o programa nos EUA</span>
+                </div>
+                
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+                    Realize seu sonho de ser 
+                    <span class="gradient-text">Au Pair</span> nos EUA
+                </h1>
+                
+                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Do zero ao embarque: preparação completa e honesta, com quem entende cada etapa do processo porque está vivendo agora.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#cta" class="px-8 py-4 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition shadow-lg hover:shadow-xl">
+                        Acessar o curso completo
+                    </a>
+                    <a href="#sobre" class="px-8 py-4 bg-white border-2 border-gray-200 rounded-xl font-semibold hover:border-gray-300 transition">
+                        Saber mais
+                    </a>
+                </div>
+
+                <div class="mt-12 flex items-center justify-center gap-8 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-violet-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                        </svg>
+                        <span>Centenas de interessadas</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-violet-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Experiência real validada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section id="sobre" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Você está sentindo isso?</h2>
+                <p class="text-gray-600 text-lg">Sabemos exatamente o que passa pela sua cabeça</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Não sei por onde começar</h3>
+                    <p class="text-gray-600 text-sm">Informações espalhadas, nada estruturado. Qual é realmente o primeiro passo?</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Medo de perder tempo</h3>
+                    <p class="text-gray-600 text-sm">E se eu investir meses e for negada? E se escolher errado a agência ou família?</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Inglês inseguro</h3>
+                    <p class="text-gray-600 text-sm">Como falar sobre cuidar de crianças em inglês durante a entrevista?</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Informações confusas</h3>
+                    <p class="text-gray-600 text-sm">Promessas irreais vs relatos assustadores. Em quem confiar?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">A preparação que você precisa</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Tudo que você precisa saber, organizado em um único lugar, sem enrolação</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-violet-50 to-pink-50 p-10 rounded-3xl border border-violet-100">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm">
+                        <svg class="w-8 h-8 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Curso Online Completo</h3>
+                    <p class="text-gray-700 mb-6">Do funcionamento do programa até a preparação final. Tudo estruturado em módulos claros e objetivos.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Acesso vitalício ao conteúdo</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Atualizações constantes incluídas</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Material de apoio e templates</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-10 rounded-3xl border border-gray-200">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm">
+                        <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Consultoria Individual</h3>
+                    <p class="text-gray-700 mb-6">Quer um acompanhamento mais próximo? Oferecemos suporte personalizado para sua jornada.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-700 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Análise completa do seu perfil</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-700 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Simulações de entrevista em inglês</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-700 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm text-gray-700">Revisão de documentos e aplicação</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto relative">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Por que este curso é diferente?</h2>
+                <p class="text-gray-400 text-lg">Preparação de verdade, sem enrolação</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">✨</div>
+                    <h3 class="font-semibold text-lg mb-2">Experiência Real</h3>
+                    <p class="text-gray-400 text-sm">Criado por quem está vivendo o programa agora nos EUA. Não é teoria.</p>
+                </div>
+
+                <div class="glass p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="font-semibold text-lg mb-2">Sem Promessas Falsas</h3>
+                    <p class="text-gray-400 text-sm">Honestidade total sobre o processo e suas dificuldades reais.</p>
+                </div>
+
+                <div class="glass p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">🗣️</div>
+                    <h3 class="font-semibold text-lg mb-2">Inglês Aplicado</h3>
+                    <p class="text-gray-400 text-sm">Vocabulário específico para entrevistas e o dia a dia como Au Pair.</p>
+                </div>
+
+                <div class="glass p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">🧭</div>
+                    <h3 class="font-semibold text-lg mb-2">Suporte Real</h3>
+                    <p class="text-gray-400 text-sm">Você não estará sozinha. Acompanhamento ao longo do processo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section id="conteudo" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">O que você vai aprender</h2>
+                <p class="text-gray-600 text-lg">Conteúdo completo, do básico ao avançado</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="font-bold text-violet-600">01</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Entendendo o programa Au Pair</h3>
+                            <p class="text-gray-600 text-sm">Funcionamento completo, requisitos oficiais, tipos de visto, agências credenciadas e como o processo realmente funciona.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="font-bold text-violet-600">02</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Preparação do perfil e documentação</h3>
+                            <p class="text-gray-600 text-sm">Como montar um perfil atrativo, documentos necessários, fotos, carta de apresentação e o que as famílias realmente procuram.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="font-bold text-violet-600">03</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Inglês para entrevistas</h3>
+                            <p class="text-gray-600 text-sm">Vocabulário específico, frases comuns, como responder perguntas difíceis e simulações práticas de entrevistas reais.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="font-bold text-violet-600">04</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Escolhendo a família certa</h3>
+                            <p class="text-gray-600 text-sm">Red flags, perguntas essenciais, como avaliar compatibilidade, negociação de tarefas e expectativas realistas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <span class="font-bold text-violet-600">05</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Preparação final e embarque</h3>
+                            <p class="text-gray-600 text-sm">O que levar, primeiras semanas nos EUA, adaptação cultural, gestão financeira e vida real no programa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-violet-50 to-pink-50 p-8 rounded-2xl border border-violet-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                            <span class="font-bold text-violet-600">🎁</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">Bônus: Erros mais comuns</h3>
+                            <p class="text-gray-700 text-sm">Lista completa dos erros que as candidatas cometem e como evitar cada um deles para maximizar suas chances.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Perguntas Frequentes</h2>
+                <p class="text-gray-600 text-lg">Respondemos suas dúvidas mais comuns</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-white p-6 rounded-2xl border border-gray-200 card-hover">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                        Preciso ter inglês fluente?
+                        <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed">Não. O programa exige inglês intermediário, e o curso te prepara exatamente para isso. Ensinamos o inglês aplicado que você precisa para o dia a dia e para as entrevistas.</p>
+                </details>
+
+                <details class="group bg-white p-6 rounded-2xl border border-gray-200 card-hover">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                        Este curso substitui a agência?
+                        <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed">Não. Você ainda precisará escolher uma agência oficial credenciada. O curso te prepara para fazer as melhores escolhas, entender o processo e ter sucesso em cada etapa.</p>
+                </details>
+
+                <details class="group bg-white p-6 rounded-2xl border border-gray-200 card-hover">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                        Quanto tempo leva para completar o curso?
+                        <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed">O conteúdo pode ser consumido em poucas semanas, mas você tem acesso vitalício para revisitar sempre que precisar. Cada pessoa avança no seu próprio ritmo.</p>
+                </details>
+
+                <details class="group bg-white p-6 rounded-2xl border border-gray-200 card-hover">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                        Vocês garantem minha aprovação?
+                        <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed">Não prometemos aprovação garantida porque isso seria desonesto. Prometemos te dar a melhor preparação possível, baseada em experiência real e honesta sobre o processo.</p>
+                </details>
+
+                <details class="group bg-white p-6 rounded-2xl border border-gray-200 card-hover">
+                    <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                        Como funciona a consultoria individual?
+                        <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed">A consultoria é oferecida separadamente do curso. Inclui análise do seu perfil, simulações de entrevista personalizadas e revisão de documentos. Entre em contato para mais detalhes.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="cta" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+        </div>
+        <div class="max-w-4xl mx-auto text-center relative">
+            <h2 class="text-4xl sm:text-5xl font-bold mb-6">Comece sua jornada hoje</h2>
+            <p class="text-xl mb-10 opacity-95 leading-relaxed">Pare de procrastinar por medo ou falta de informação. Dê o primeiro passo com segurança e clareza.</p>
+            
+            <div class="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/20 mb-8">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="px-8 py-4 bg-white text-violet-600 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        Acessar curso completo
+                    </a>
+                    <a href="#" class="px-8 py-4 bg-transparent border-2 border-white rounded-xl font-semibold hover:bg-white/10 transition flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Entrar na lista de espera
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center gap-2 text-sm opacity-90">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Garantia de 7 dias para testar sem riscos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-pink-500 rounded-lg"></div>
+                    <span class="font-bold text-white">Au Pair USA</span>
+                </div>
+                
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="hover:text-white transition">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition">Termos de Uso</a>
+                    <a href="#" class="hover:text-white transition">Contato</a>
+                </div>
+
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border
