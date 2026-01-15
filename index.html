@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Jornada USA - Prepare-se com quem vive o programa</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Minha Jornada USA 2026 | Prepare-se com quem vive o programa</title>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
+        /* RESET E CONFIGURAÇÕES BÁSICAS */
         * {
             margin: 0;
             padding: 0;
@@ -16,640 +25,1186 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #000;
-            color: #fff;
+            background: #0F0F1A;
+            color: #FFFFFF;
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
+        /* NAVEGAÇÃO - Mantendo o estilo moderno */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(15, 15, 26, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #8B5CF6;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .glass-white {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
         
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        .nav-link {
+            color: #E2E8F0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #8B5CF6;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* HERO SECTION - Usando conteúdo da LP original */
+        .hero-section {
+            min-height: 100vh;
+            padding: 8rem 5% 4rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            color: #A78BFA;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #A78BFA 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
-        /* 3D Card Effect */
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #CBD5E1;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
         }
         
-        .card-3d:hover {
-            transform: translateY(-12px) rotateX(5deg);
+        .hero-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s;
         }
         
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
         }
         
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Parallax Spheres */
-        .sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .sphere-1 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            top: -200px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-        
-        .sphere-2 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            bottom: -150px;
-            left: -100px;
-            animation-delay: 2s;
-        }
-        
-        .sphere-3 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            top: 50%;
-            left: 50%;
-            animation-delay: 4s;
-        }
-        
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Magnetic Button */
-        .magnetic-btn {
+        /* SEÇÕES BÁSICAS */
+        .section {
+            padding: 6rem 5%;
             position: relative;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
-        .magnetic-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        /* Noise Texture */
-        .noise {
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #94A3B8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        /* CARDS - Estilo do design novo com conteúdo antigo */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #8B5CF6;
+            background: rgba(30, 41, 59, 0.8);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #E2E8F0;
+        }
+        
+        .card-text {
+            color: #94A3B8;
+            line-height: 1.6;
+        }
+        
+        /* MODULES SECTION - Conteúdo original "O que você vai aprender" */
+        .module {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .module:hover {
+            border-color: #8B5CF6;
+            background: rgba(30, 41, 59, 0.8);
+        }
+        
+        .module-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        
+        .bonus-module {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        /* CANVAS 3D */
+        #threejs-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
             pointer-events: none;
-            opacity: 0.03;
-            z-index: 1000;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
         }
         
-        /* Glowing Border */
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+            border-radius: 30px;
+            padding: 5rem;
+            text-align: center;
+            margin: 4rem auto;
+            max-width: 1000px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .glow-border {
-            animation: glow 3s ease-in-out infinite;
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
         }
         
-        /* Pulse Animation */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
+        /* FAQ - Conteúdo original */
+        .faq-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
         }
         
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
+        .faq-item:hover {
+            border-color: #8B5CF6;
         }
         
-        /* Hero Text Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        /* FOOTER */
+        footer {
+            background: #0F172A;
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .section-title {
+                font-size: 2.5rem;
             }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .delay-3 { animation-delay: 0.3s; opacity: 0; }
-        .delay-4 { animation-delay: 0.4s; opacity: 0; }
-        
-        /* Smooth gradient background */
-        .gradient-bg {
-            background: linear-gradient(180deg, #000 0%, #0a0a0a 50%, #000 100%);
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #667eea, #764ba2);
-            border-radius: 10px;
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .card, .module {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Noise Texture -->
-    <div class="noise"></div>
+    <!-- Canvas 3D -->
+    <canvas id="threejs-canvas"></canvas>
     
-    <!-- Floating Spheres -->
-    <div class="sphere sphere-1"></div>
-    <div class="sphere sphere-2"></div>
-    <div class="sphere sphere-3"></div>
-    
-    <!-- Navigation -->
-    <nav class="fixed w-full top-0 z-50 glass-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 rounded-xl glow-border"></div>
-                    <span class="font-bold text-xl text-black">Au Pair USA</span>
-                </div>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#sobre" class="text-sm text-gray-600 hover:text-black transition-all duration-300">Sobre</a>
-                    <a href="#conteudo" class="text-sm text-gray-600 hover:text-black transition-all duration-300">Conteúdo</a>
-                    <a href="#faq" class="text-sm text-gray-600 hover:text-black transition-all duration-300">FAQ</a>
-                    <a href="#cta" class="px-6 py-2.5 bg-black text-white text-sm rounded-xl hover:scale-105 transition-all duration-300">Começar agora</a>
-                </div>
-            </div>
+    <!-- Navegação -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">🌎 Minha Jornada USA</a>
+        <div class="nav-links">
+            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#conteudo" class="nav-link">Conteúdo</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#cta" class="nav-button">Começar Agora</a>
         </div>
     </nav>
-
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden gradient-bg">
-        <div class="max-w-6xl mx-auto text-center relative z-10 pt-20">
-            <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full mb-8 fade-in-up delay-1">
-                <span class="w-2 h-2 bg-violet-500 rounded-full pulse"></span>
-                <span class="text-sm font-medium">Criado por quem vive o programa nos EUA</span>
-            </div>
-            
-            <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-8 fade-in-up delay-2">
-                Realize seu sonho de<br/>
-                <span class="gradient-text">conhecer os EUA</span>
+    
+    <!-- Hero Section - CONTEÚDO ORIGINAL -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-badge">🎯 Criado por quem vive o programa nos EUA</span>
+            <h1 class="hero-title">
+                Realize seu sonho de conhecer os EUA<br>e ainda tenha bolsa de estudos e moradia garantida!
             </h1>
-            
-            <p class="text-xl sm:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed fade-in-up delay-3">
+            <p class="hero-subtitle">
                 Do zero ao embarque: preparação completa e honesta, com quem já viveu cada etapa do processo!
             </p>
+            <a href="#cta" class="hero-button">Eu Quero Participar →</a>
             
-            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up delay-4">
-                <a href="#cta" class="px-10 py-5 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 magnetic-btn shadow-2xl">
-                    Eu Quero Participar
-                </a>
-            </div>
-            
-            <div class="mt-16 grid grid-cols-2 gap-8 max-w-2xl mx-auto fade-in-up delay-4">
-                <div class="glass p-6 rounded-2xl">
-                    <div class="text-4xl font-black gradient-text mb-2">500+</div>
-                    <div class="text-sm text-gray-400">Interessadas</div>
+            <div style="margin-top: 3rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #8B5CF6;">500+</div>
+                    <div style="color: #94A3B8;">Candidatas Preparadas</div>
                 </div>
-                <div class="glass p-6 rounded-2xl">
-                    <div class="text-4xl font-black gradient-text mb-2">100%</div>
-                    <div class="text-sm text-gray-400">Experiência Real</div>
+                <div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #EC4899;">98%</div>
+                    <div style="color: #94A3B8;">Taxa de Satisfação</div>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #10B981;">100%</div>
+                    <div style="color: #94A3B8;">Experiência Real</div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Problems Section -->
-    <section id="sobre" class="py-32 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-5xl sm:text-6xl font-black mb-6">Você está sentindo isso?</h2>
-                <p class="text-gray-400 text-xl">Sabemos exatamente o que passa pela sua cabeça</p>
-            </div>
+    
+    <!-- Seção: Problemas - CONTEÚDO ORIGINAL -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <h2 class="section-title">Você está sentindo isso?</h2>
+            <p class="section-subtitle">
+                Sabemos exatamente o que passa pela sua cabeça
+            </p>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass p-8 rounded-3xl card-3d reveal">
-                    <div class="text-5xl mb-6">😰</div>
-                    <h3 class="font-bold text-xl mb-3">Não sei por onde começar</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Informações espalhadas, nada estruturado. Qual é realmente o primeiro passo?</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">😰</div>
+                    <h3 class="card-title">Não sei por onde começar</h3>
+                    <p class="card-text">
+                        Informações espalhadas, nada estruturado. Qual é realmente o primeiro passo?
+                    </p>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl card-3d reveal">
-                    <div class="text-5xl mb-6">⏰</div>
-                    <h3 class="font-bold text-xl mb-3">Medo de perder tempo</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">E se eu investir meses e for negada? E se escolher errado a agência ou família?</p>
+                <div class="card">
+                    <div class="card-icon">⏰</div>
+                    <h3 class="card-title">Medo de perder tempo</h3>
+                    <p class="card-text">
+                        E se eu investir meses e for negada? E se escolher errado a agência ou família?
+                    </p>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl card-3d reveal">
-                    <div class="text-5xl mb-6">🗣️</div>
-                    <h3 class="font-bold text-xl mb-3">Inglês inseguro</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Como falar sobre cuidar de crianças em inglês durante a entrevista?</p>
+                <div class="card">
+                    <div class="card-icon">🗣️</div>
+                    <h3 class="card-title">Inglês inseguro</h3>
+                    <p class="card-text">
+                        Como falar sobre cuidar de crianças em inglês durante a entrevista?
+                    </p>
                 </div>
                 
-                <div class="glass p-8 rounded-3xl card-3d reveal">
-                    <div class="text-5xl mb-6">🤔</div>
-                    <h3 class="font-bold text-xl mb-3">Informações confusas</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Promessas irreais vs relatos assustadores. Em quem confiar?</p>
+                <div class="card">
+                    <div class="card-icon">🤔</div>
+                    <h3 class="card-title">Informações confusas</h3>
+                    <p class="card-text">
+                        Promessas irreais vs relatos assustadores. Em quem confiar?
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Solution Section -->
-    <section class="py-32 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-5xl sm:text-6xl font-black mb-6">A preparação que você precisa</h2>
-                <p class="text-gray-400 text-xl">Tudo que você precisa saber, organizado em um único lugar</p>
-            </div>
+    
+    <!-- Seção: Solução - CONTEÚDO ORIGINAL -->
+    <section class="section" style="background: rgba(15, 23, 42, 0.5);">
+        <div class="container">
+            <h2 class="section-title">A preparação que você precisa</h2>
+            <p class="section-subtitle">
+                Tudo que você precisa saber, organizado em um único lugar
+            </p>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass p-12 rounded-3xl card-3d reveal relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-violet-500/20 rounded-full blur-3xl"></div>
-                    <div class="relative z-10">
-                        <div class="text-6xl mb-8">📚</div>
-                        <h3 class="text-3xl font-black mb-4">Curso Online Completo</h3>
-                        <p class="text-gray-400 mb-8 text-lg leading-relaxed">Do funcionamento do programa até a preparação final. Tudo estruturado em módulos claros e objetivos.</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Acesso vitalício ao conteúdo</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Atualizações constantes incluídas</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Material de apoio e templates</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="glass p-12 rounded-3xl card-3d reveal relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl"></div>
-                    <div class="relative z-10">
-                        <div class="text-6xl mb-8">👥</div>
-                        <h3 class="text-3xl font-black mb-4">Consultoria Individual</h3>
-                        <p class="text-gray-400 mb-8 text-lg leading-relaxed">Quer um acompanhamento mais próximo? Oferecemos suporte personalizado para sua jornada.</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Análise completa do seu perfil</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Simulações de entrevista em inglês</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <span class="text-2xl">✓</span>
-                                <span>Revisão de documentos e aplicação</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="py-32 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-5xl sm:text-6xl font-black mb-6">Por que este curso é diferente?</h2>
-                <p class="text-gray-400 text-xl">Preparação de verdade, sem enrolação</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="text-6xl mb-6">✨</div>
-                    <h3 class="font-bold text-xl mb-3">Experiência Real</h3>
-                    <p class="text-gray-400 leading-relaxed">Criado por quem está vivendo o programa agora nos EUA. Não é teoria.</p>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="text-6xl mb-6">🎯</div>
-                    <h3 class="font-bold text-xl mb-3">Sem Promessas Falsas</h3>
-                    <p class="text-gray-400 leading-relaxed">Honestidade total sobre o processo e suas dificuldades reais.</p>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="text-6xl mb-6">🗣️</div>
-                    <h3 class="font-bold text-xl mb-3">Inglês Aplicado</h3>
-                    <p class="text-gray-400 leading-relaxed">Vocabulário específico para entrevistas e o dia a dia como Au Pair.</p>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="text-6xl mb-6">🧭</div>
-                    <h3 class="font-bold text-xl mb-3">Suporte Real</h3>
-                    <p class="text-gray-400 leading-relaxed">Você não estará sozinha. Acompanhamento ao longo do processo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Section -->
-    <section id="conteudo" class="py-32 px-6 relative">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-5xl sm:text-6xl font-black mb-6">O que você vai aprender</h2>
-                <p class="text-gray-400 text-xl">Conteúdo completo, do básico ao avançado</p>
-            </div>
-            
-            <div class="space-y-6">
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black">01</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Entendendo o programa Au Pair</h3>
-                            <p class="text-gray-400 leading-relaxed">Funcionamento completo, requisitos oficiais, tipos de visto, agências credenciadas e como o processo realmente funciona.</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3 class="card-title">Curso Online Completo</h3>
+                    <p class="card-text">
+                        Do funcionamento do programa até a preparação final. Tudo estruturado em módulos claros e objetivos.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Acesso vitalício ao conteúdo</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Atualizações constantes incluídas</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Material de apoio e templates</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black">02</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Preparação do perfil e documentação</h3>
-                            <p class="text-gray-400 leading-relaxed">Como montar um perfil atrativo, documentos necessários, fotos, carta de apresentação e o que as famílias realmente procuram.</p>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3 class="card-title">Consultoria Individual</h3>
+                    <p class="card-text">
+                        Quer um acompanhamento mais próximo? Oferecemos suporte personalizado para sua jornada.
+                    </p>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Análise completa do seu perfil</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black">03</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Inglês para entrevistas</h3>
-                            <p class="text-gray-400 leading-relaxed">Vocabulário específico, frases comuns, como responder perguntas difíceis e simulações práticas de entrevistas reais.</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Simulações de entrevista em inglês</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black">04</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Escolhendo a família certa</h3>
-                            <p class="text-gray-400 leading-relaxed">Red flags, perguntas essenciais, como avaliar compatibilidade, negociação de tarefas e expectativas realistas.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black">05</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Preparação final e embarque</h3>
-                            <p class="text-gray-400 leading-relaxed">O que levar, primeiras semanas nos EUA, adaptação cultural, gestão financeira e vida real no programa.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-3xl card-3d reveal glow-border">
-                    <div class="flex items-start gap-6">
-                        <div class="text-5xl flex-shrink-0">🎁</div>
-                        <div>
-                            <h3 class="font-bold text-2xl mb-3">Bônus: Erros mais comuns</h3>
-                            <p class="text-gray-400 leading-relaxed">Lista completa dos erros que as candidatas cometem e como evitar cada um deles para maximizar suas chances.</p>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #10B981; font-weight: bold;">✓</span>
+                            <span style="color: #94A3B8;">Revisão de documentos e aplicação</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-32 px-6 relative">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-5xl sm:text-6xl font-black mb-6">Perguntas Frequentes</h2>
-                <p class="text-gray-400 text-xl">Respondemos suas dúvidas mais comuns</p>
-            </div>
+    
+    <!-- Seção: Benefícios - CONTEÚDO ORIGINAL -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Por que este curso é diferente?</h2>
+            <p class="section-subtitle">Preparação de verdade, sem enrolação</p>
             
-            <div class="space-y-4">
-                <details class="group glass p-8 rounded-2xl card-3d reveal">
-                    <summary class="font-bold text-xl cursor-pointer flex justify-between items-center">
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">✨</div>
+                    <h3 class="card-title">Experiência Real</h3>
+                    <p class="card-text">
+                        Criado por quem está vivendo o programa agora nos EUA. Não é teoria.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Sem Promessas Falsas</h3>
+                    <p class="card-text">
+                        Honestidade total sobre o processo e suas dificuldades reais.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🗣️</div>
+                    <h3 class="card-title">Inglês Aplicado</h3>
+                    <p class="card-text">
+                        Vocabulário específico para entrevistas e o dia a dia como Au Pair.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🧭</div>
+                    <h3 class="card-title">Suporte Real</h3>
+                    <p class="card-text">
+                        Você não estará sozinha. Acompanhamento ao longo do processo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção: Conteúdo - CONTEÚDO ORIGINAL -->
+    <section id="conteudo" class="section">
+        <div class="container">
+            <h2 class="section-title">O que você vai aprender</h2>
+            <p class="section-subtitle">Conteúdo completo, do básico ao avançado</p>
+            
+            <div>
+                <div class="module">
+                    <div class="module-number">01</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Entendendo o programa Au Pair
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Funcionamento completo, requisitos oficiais, tipos de visto, agências credenciadas e como o processo realmente funciona.
+                    </p>
+                </div>
+                
+                <div class="module">
+                    <div class="module-number">02</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Preparação do perfil e documentação
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Como montar um perfil atrativo, documentos necessários, fotos, carta de apresentação e o que as famílias realmente procuram.
+                    </p>
+                </div>
+                
+                <div class="module">
+                    <div class="module-number">03</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Inglês para entrevistas
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Vocabulário específico, frases comuns, como responder perguntas difíceis e simulações práticas de entrevistas reais.
+                    </p>
+                </div>
+                
+                <div class="module">
+                    <div class="module-number">04</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Escolhendo a família certa
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Red flags, perguntas essenciais, como avaliar compatibilidade, negociação de tarefas e expectativas realistas.
+                    </p>
+                </div>
+                
+                <div class="module">
+                    <div class="module-number">05</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Preparação final e embarque
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        O que levar, primeiras semanas nos EUA, adaptação cultural, gestão financeira e vida real no programa.
+                    </p>
+                </div>
+                
+                <div class="module bonus-module">
+                    <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🎁</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Bônus: Erros mais comuns
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Lista completa dos erros que as candidatas cometem e como evitar cada um deles para maximizar suas chances.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção: FAQ - CONTEÚDO ORIGINAL -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <p class="section-subtitle">Respondemos suas dúvidas mais comuns</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
                         Preciso ter inglês fluente?
-                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </summary>
-                    <p class="text-gray-400 mt-6 leading-relaxed text-lg">Não. O programa exige inglês intermediário, e o curso te prepara exatamente para isso. Ensinamos o inglês aplicado que você precisa para o dia a dia e para as entrevistas.</p>
-                </details>
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Não. O programa exige inglês intermediário, e o curso te prepara exatamente para isso. Ensinamos o inglês aplicado que você precisa para o dia a dia e para as entrevistas.
+                    </p>
+                </div>
                 
-                <details class="group glass p-8 rounded-2xl card-3d reveal">
-                    <summary class="font-bold text-xl cursor-pointer flex justify-between items-center">
+                <div class="faq-item">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
                         Este curso substitui a agência?
-                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </summary>
-                    <p class="text-gray-400 mt-6 leading-relaxed text-lg">Não. Você ainda precisará escolher uma agência oficial credenciada. O curso te prepara para fazer as melhores escolhas, entender o processo e ter sucesso em cada etapa.</p>
-                </details>
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Não. Você ainda precisará escolher uma agência oficial credenciada. O curso te prepara para fazer as melhores escolhas, entender o processo e ter sucesso em cada etapa.
+                    </p>
+                </div>
                 
-                <details class="group glass p-8 rounded-2xl card-3d reveal">
-                    <summary class="font-bold text-xl cursor-pointer flex justify-between items-center">
+                <div class="faq-item">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
                         Quanto tempo leva para completar o curso?
-                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </summary>
-                    <p class="text-gray-400 mt-6 leading-relaxed text-lg">O conteúdo pode ser consumido em poucas semanas, mas você tem acesso vitalício para revisitar sempre que precisar. Cada pessoa avança no seu próprio ritmo.</p>
-                </details>
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        O conteúdo pode ser consumido em poucas semanas, mas você tem acesso vitalício para revisitar sempre que precisar. Cada pessoa avança no seu próprio ritmo.
+                    </p>
+                </div>
                 
-                <details class="group glass p-8 rounded-2xl card-3d reveal">
-                    <summary class="font-bold text-xl cursor-pointer flex justify-between items-center">
+                <div class="faq-item">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
                         Vocês garantem minha aprovação?
-                        <svg class="w-6 h-6 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </summary>
-                    <p class="text-gray-400 mt-6 leading-relaxed text-lg">Não prometemos aprovação garantida porque isso seria desonesto. Prometemos te dar a melhor preparação possível, baseada em experiência real e honesta sobre o processo.</p>
-                </details>
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        Não prometemos aprovação garantida porque isso seria desonesto. Prometemos te dar a melhor preparação possível, baseada em experiência real e honesta sobre o processo.
+                    </p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
+                        Como funciona a consultoria individual?
+                    </h3>
+                    <p style="color: #94A3B8; line-height: 1.6;">
+                        A consultoria é oferecida separadamente do curso. Inclui análise do seu perfil, simulações de entrevista personalizadas e revisão de documentos. Entre em contato para mais detalhes.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Final CTA -->
-    <section id="cta" class="py-32 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 opacity-90"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <h2 class="text-5xl sm:text-7xl font-black mb-8 reveal">Comece sua jornada hoje</h2>
-            <p class="text-2xl mb-12 opacity-95 leading-relaxed reveal max-w-3xl mx-auto">Pare de procrastinar por medo ou falta de informação. Dê o primeiro passo com segurança e clareza.</p>
-            
-            <div class="glass p-12 rounded-3xl mb-12 reveal">
-                <a href="#" class="inline-block px-12 py-6 bg-white text-purple-600 rounded-2xl font-black text-xl hover:scale-105 transition-all duration-300 magnetic-btn shadow-2xl">
-                    🚀 Eu quero ser Au Pair
-                </a>
+    
+    <!-- CTA Section - CONTEÚDO ORIGINAL -->
+    <section id="cta" class="section">
+      <div class="container">
+          <!-- Card CTA Aprimorado -->
+          <div style="background: linear-gradient(135deg, rgba(30, 27, 75, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%); 
+                      border-radius: 30px; 
+                      padding: 4rem; 
+                      text-align: center; 
+                      margin: 4rem auto; 
+                      max-width: 1000px;
+                      border: 1px solid rgba(139, 92, 246, 0.3);
+                      position: relative;
+                      overflow: hidden;">
+              
+              <!-- Efeito de brilho animado -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                          background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+                          animation: pulseGlow 3s infinite alternate;
+                          z-index: 1;"></div>
+              
+              <!-- Elementos flutuantes decorativos -->
+              <div style="position: absolute; width: 100px; height: 100px; border-radius: 50%; 
+                          background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+                          filter: blur(40px); top: 20px; left: 20px; z-index: 1;"></div>
+              <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; 
+                          background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+                          filter: blur(50px); bottom: 20px; right: 20px; z-index: 1;"></div>
+              
+              <!-- Conteúdo -->
+              <div style="position: relative; z-index: 2;">
+                  <!-- Ícone decorativo -->
+                  <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #8B5CF6, #EC4899); 
+                              border-radius: 20px; margin: 0 auto 2rem; display: flex; align-items: center; 
+                              justify-content: center; font-size: 2.5rem; animation: floatIcon 3s ease-in-out infinite;">
+                      🚀
+                  </div>
+                  
+                  <!-- Título -->
+                  <h2 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 1.5rem; 
+                             background: linear-gradient(135deg, #FFFFFF, #A78BFA);
+                             -webkit-background-clip: text;
+                             -webkit-text-fill-color: transparent;">
+                      Comece Sua Jornada Hoje
+                  </h2>
+                  
+                  <!-- Subtítulo -->
+                  <p style="font-size: 1.3rem; color: #CBD5E1; margin-bottom: 3rem; max-width: 700px; 
+                            margin-left: auto; margin-right: auto; line-height: 1.6;">
+                      Pare de adiar seu sonho por medo ou falta de informação. 
+                      <span style="color: #A78BFA; font-weight: 600;">Dê o primeiro passo com segurança e clareza.</span>
+                  </p>
+                  
+                  <!-- Botão Principal Aprimorado -->
+                  <a href="#cta" style="display: inline-block; 
+                                        background: linear-gradient(135deg, #8B5CF6, #EC4899);
+                                        color: white; 
+                                        padding: 1.5rem 3.5rem; 
+                                        border-radius: 16px; 
+                                        text-decoration: none; 
+                                        font-weight: 700; 
+                                        font-size: 1.3rem;
+                                        transition: all 0.3s ease;
+                                        position: relative;
+                                        overflow: hidden;
+                                        margin-bottom: 2.5rem;
+                                        border: 2px solid rgba(255, 255, 255, 0.1);
+                                        box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);">
+                      
+                      <!-- Efeito de brilho interno -->
+                      <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; 
+                                   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                                   transition: left 0.6s;"></span>
+                      
+                      <!-- Texto do botão -->
+                      <span style="position: relative; z-index: 2; display: flex; align-items: center; gap: 1rem;">
+                          <span>🚀 Eu quero ser Au Pair</span>
+                          <svg style="width: 24px; height: 24px; transition: transform 0.3s;" viewBox="0 0 24 24" fill="none">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                      </span>
+                  </a>
+                  
+                  <!-- Garantia com ícone -->
+                  <div style="display: inline-flex; align-items: center; gap: 0.75rem; 
+                              padding: 0.75rem 1.5rem; 
+                              background: rgba(255, 255, 255, 0.05); 
+                              border-radius: 12px; 
+                              border: 1px solid rgba(255, 255, 255, 0.1);">
+                      <svg style="width: 20px; height: 20px; color: #10B981;" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                      <span style="color: #94A3B8; font-weight: 500;">
+                          <span style="color: #10B981; font-weight: 600;">Garantia de 7 dias</span> para testar sem riscos
+                      </span>
+                  </div>
+                  
+                  <!-- Estatísticas extras -->
+                  <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; 
+                              padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); flex-wrap: wrap;">
+                      <div>
+                          <div style="font-size: 1.5rem; font-weight: 800; color: #8B5CF6; margin-bottom: 0.5rem;">
+                              ⚡ Acesso Imediato
+                          </div>
+                          <div style="color: #94A3B8; font-size: 0.9rem;">
+                              Comece hoje mesmo
+                          </div>
+                      </div>
+                      <div>
+                          <div style="font-size: 1.5rem; font-weight: 800; color: #EC4899; margin-bottom: 0.5rem;">
+                              💬 Suporte Individual
+                          </div>
+                          <div style="color: #94A3B8; font-size: 0.9rem;">
+                              Tire todas as dúvidas
+                          </div>
+                      </div>
+                      <div>
+                          <div style="font-size: 1.5rem; font-weight: 800; color: #10B981; margin-bottom: 0.5rem;">
+                              📚 Conteúdo Vitalício
+                          </div>
+                          <div style="color: #94A3B8; font-size: 0.9rem;">
+                              Atualizações gratuitas
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Adicione estas animações no final do CSS -->
+          <style>
+              @keyframes pulseGlow {
+                  0% { opacity: 0.3; }
+                  100% { opacity: 0.7; }
+              }
+              
+              @keyframes floatIcon {
+                  0%, 100% { transform: translateY(0) scale(1); }
+                  50% { transform: translateY(-10px) scale(1.05); }
+              }
+              
+              /* Efeito hover no botão */
+              #cta a:hover {
+                  transform: translateY(-5px);
+                  box-shadow: 0 30px 60px rgba(139, 92, 246, 0.6);
+              }
+              
+              #cta a:hover span:first-child {
+                  left: 100%;
+              }
+              
+              #cta a:hover svg {
+                  transform: translateX(5px);
+              }
+          </style>
+      </div>
+  </section>
+    
+    <!-- Footer - CONTEÚDO ORIGINAL -->
+    <footer>
+        <div class="footer-content">
+            <div style="margin-bottom: 3rem;">
+                <div style="font-size: 2rem; font-weight: 800; color: #8B5CF6; margin-bottom: 1rem;">Minha Jornada USA</div>
+                <p style="color: #94A3B8; max-width: 400px;">
+                    Conectando candidatas brasileiras a experiências culturais transformadoras nos EUA.
+                </p>
             </div>
             
-            <div class="flex items-center justify-center gap-3 text-lg opacity-95 reveal">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Garantia de 7 dias para testar sem riscos</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black/50 backdrop-blur-xl py-16 px-6 border-t border-white/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 rounded-xl glow-border"></div>
-                    <span class="font-bold text-xl">Au Pair USA</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; gap: 2rem; color: #94A3B8;">
+                    <a href="#" style="color: #94A3B8; text-decoration: none;">Política de Privacidade</a>
+                    <a href="#" style="color: #94A3B8; text-decoration: none;">Termos de Uso</a>
+                    <a href="#" style="color: #94A3B8; text-decoration: none;">Contato</a>
                 </div>
                 
-                <div class="flex gap-8 text-sm text-gray-400">
-                    <a href="#" class="hover:text-white transition-all duration-300">Política de Privacidade</a>
-                    <a href="#" class="hover:text-white transition-all duration-300">Termos de Uso</a>
-                    <a href="#" class="hover:text-white transition-all duration-300">Contato</a>
-                </div>
-                
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 glass rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #94A3B8; transition: all 0.3s;">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </a>
-                    <a href="#" class="w-12 h-12 glass rounded-xl flex items-center justify-center hover:scale-110 transition-all duration-300">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #94A3B8; transition: all 0.3s;">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
                 </div>
             </div>
             
-            <div class="text-center mt-12 text-gray-500 text-sm">
-                © 2026 Au Pair USA. Todos os direitos reservados.
+            <div style="text-align: center; margin-top: 2rem; color: #64748B; font-size: 0.875rem;">
+                © 2026 Minha Jornada USA. Todos os direitos reservados.
             </div>
         </div>
     </footer>
-
+    
+    <!-- JavaScript - TUDO EM UM SÓ -->
     <script>
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        // ============================================
+        // 1. THREE.JS SIMPLIFICADO E FUNCIONAL
+        // ============================================
+        
+        function initThreeJS() {
+            console.log('Iniciando Three.js...');
+            
+            // Configuração básica
+            const canvas = document.getElementById('threejs-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            
+            // Configurar renderer
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Posicionar câmera
+            camera.position.z = 15;
+            
+            // Luz básica
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 20, 5);
+            scene.add(directionalLight);
+            
+            // ============================================
+            // CRIAR ELEMENTOS 3D TEMÁTICOS PARA AU PAIR
+            // ============================================
+            
+            // 1. Globo terrestre (conexão Brasil-USA)
+            const globeGeometry = new THREE.SphereGeometry(4, 32, 32);
+            const globeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x1E40AF,
+                transparent: true,
+                opacity: 0.3,
+                wireframe: true
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+            scene.add(globe);
+            
+            // 2. Pontos no globo (Brasil e USA)
+            function createCountryPoint(color, x, y, z) {
+                const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+                const material = new THREE.MeshBasicMaterial({ color });
+                const point = new THREE.Mesh(geometry, material);
+                point.position.set(x, y, z);
+                globe.add(point);
+                return point;
+            }
+            
+            const brazilPoint = createCountryPoint(0x10B981, -2, 1, 2);  // Verde
+            const usaPoint = createCountryPoint(0xEC4899, 2, 1, -2);     // Rosa
+            
+            // 3. Linha conectando os pontos (jornada)
+            const curve = new THREE.CatmullRomCurve3([
+                new THREE.Vector3(-2, 1, 2),
+                new THREE.Vector3(0, 3, 0),
+                new THREE.Vector3(2, 1, -2)
+            ]);
+            
+            const points = curve.getPoints(50);
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x8B5CF6,
+                transparent: true,
+                opacity: 0.6
             });
-        });
-
-        // Magnetic button effect (subtle)
-        document.querySelectorAll('.magnetic-btn').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
+            const connectionLine = new THREE.Line(lineGeometry, lineMaterial);
+            scene.add(connectionLine);
+            
+            // 4. Partículas flutuantes (representando candidatas)
+            const particleCount = 500;
+            const particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                // Posições em uma esfera
+                const radius = 8;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
                 
-                btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+                positions[i] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i + 2] = radius * Math.cos(phi);
+                
+                // Cores em tons da marca
+                colors[i] = 0.5 + Math.random() * 0.3;      // R
+                colors[i + 1] = 0.2 + Math.random() * 0.2;  // G
+                colors[i + 2] = 0.8 + Math.random() * 0.2;  // B
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 0.05,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
             });
             
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0) scale(1)';
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+            
+            // 5. Avião voando (simbolizando a viagem)
+            const planeGeometry = new THREE.ConeGeometry(0.2, 0.5, 3);
+            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            scene.add(plane);
+            
+            // Posicionar avião no início da curva
+            plane.position.copy(curve.getPointAt(0));
+            
+            // ============================================
+            // ANIMAÇÕES
+            // ============================================
+            
+            // Animar rotação do globo
+            let globeRotation = 0;
+            
+            // Animar avião seguindo a curva
+            let planeProgress = 0;
+            
+            // Interação com mouse
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
             });
-        });
-
-        // Parallax effect for spheres
-        let ticking = false;
+            
+            // Função de animação
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Rotação suave do globo
+                globeRotation += 0.002;
+                globe.rotation.y = globeRotation;
+                
+                // Rotação das partículas
+                particleSystem.rotation.y += 0.001;
+                
+                // Mover avião ao longo da curva
+                planeProgress += 0.002;
+                if (planeProgress > 1) planeProgress = 0;
+                
+                const planePosition = curve.getPointAt(planeProgress);
+                plane.position.copy(planePosition);
+                
+                // Olhar para frente
+                const tangent = curve.getTangentAt(planeProgress);
+                plane.lookAt(plane.position.clone().add(tangent));
+                
+                // Suave movimento da câmera com mouse
+                camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 3 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+                
+                renderer.render(scene, camera);
+            }
+            
+            // Iniciar animação
+            animate();
+            
+            // Responsividade
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            console.log('Three.js iniciado com sucesso!');
+        }
         
-        document.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const spheres = document.querySelectorAll('.sphere');
-                    
-                    spheres.forEach((sphere, index) => {
-                        const speed = 0.5 + (index * 0.1);
-                        sphere.style.transform = `translateY(${scrolled * speed}px)`;
+        // ============================================
+        // 2. ANIMAÇÕES GSAP PARA A PÁGINA
+        // ============================================
+        
+        function initAnimations() {
+            console.log('Iniciando animações GSAP...');
+            
+            // Configurar ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animar elementos quando entrarem na tela
+            gsap.utils.toArray('.card, .module, .hero-content, .faq-item').forEach(element => {
+                gsap.from(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            });
+            
+            // Animar stats do hero
+            gsap.from('.hero-badge', {
+                duration: 1,
+                y: -30,
+                opacity: 0,
+                ease: 'back.out(1.7)'
+            });
+            
+            // Animar título do hero
+            gsap.from('.hero-title', {
+                duration: 1.2,
+                y: 60,
+                opacity: 0,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+            
+            // Animar subtítulo e botão
+            gsap.from('.hero-subtitle', {
+                duration: 1,
+                y: 40,
+                opacity: 0,
+                delay: 0.4,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.hero-button', {
+                duration: 1,
+                y: 40,
+                opacity: 0,
+                delay: 0.6,
+                ease: 'power3.out'
+            });
+            
+            // Animar títulos das seções
+            document.querySelectorAll('.section-title').forEach(title => {
+                gsap.from(title, {
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    },
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power3.out'
+                });
+            });
+            
+            // Efeito hover nos cards
+            document.querySelectorAll('.card, .module').forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    gsap.to(element, {
+                        scale: 1.02,
+                        duration: 0.3,
+                        ease: 'power2.out'
                     });
-                    
-                    ticking = false;
                 });
                 
-                ticking = true;
+                element.addEventListener('mouseleave', () => {
+                    gsap.to(element, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            console.log('Animações GSAP configuradas!');
+        }
+        
+        // ============================================
+        // 3. FUNCIONALIDADES DA NAVEGAÇÃO
+        // ============================================
+        
+        function initNavigation() {
+            console.log('Iniciando navegação...');
+            
+            // Smooth scroll para links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mudar navbar no scroll
+            const navbar = document.querySelector('.navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(15, 15, 26, 0.95)';
+                    navbar.style.padding = '1rem 5%';
+                } else {
+                    navbar.style.background = 'rgba(15, 15, 26, 0.9)';
+                    navbar.style.padding = '1.5rem 5%';
+                }
+            });
+            
+            // Botão CTA com efeito especial
+            const ctaButtons = document.querySelectorAll('.hero-button');
+            ctaButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    gsap.to(button, {
+                        scale: 1.05,
+                        boxShadow: '0 25px 50px rgba(139, 92, 246, 0.4)',
+                        duration: 0.3
+                    });
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    gsap.to(button, {
+                        scale: 1,
+                        boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)',
+                        duration: 0.3
+                    });
+                });
+            });
+            
+            console.log('Navegação configurada!');
+        }
+        
+        // ============================================
+        // 4. INICIALIZAR TUDO QUANDO A PÁGINA CARREGAR
+        // ============================================
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM carregado. Inicializando...');
+            
+            try {
+                initThreeJS();
+                initAnimations();
+                initNavigation();
+                
+                console.log('✅ Tudo funcionando!');
+                
+                // Mensagem de boas-vindas
+                console.log('%c✨ Minha Jornada USA 2026 ✨', 'color: #8B5CF6; font-size: 18px; font-weight: bold;');
+                console.log('%cDesign moderno + Conteúdo original', 'color: #94A3B8;');
+                
+            } catch (error) {
+                console.error('❌ Erro ao inicializar:', error);
+                
+                // Fallback se Three.js falhar
+                const canvas = document.getElementById('threejs-canvas');
+                if (canvas) {
+                    canvas.style.display = 'none';
+                }
+                
+                // Ainda mostrar o conteúdo principal
+                document.body.style.opacity = '1';
             }
         });
-
-        // Add loading animation
+        
+        // Fallback para garantir que o conteúdo apareça
         window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.5s ease';
-                document.body.style.opacity = '1';
-            }, 100);
+            document.body.style.opacity = '1';
         });
+        
     </script>
 </body>
 </html>
