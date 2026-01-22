@@ -5,249 +5,738 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Jornada USA 2026 | Prepare-se com quem vive o programa</title>
     
-    <!-- Three.js -->
+    <!-- Three.js + Addons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <!-- GSAP para animações -->
+    <!-- GSAP para animações avançadas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
     
-    <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Fontes modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones modernos -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     <style>
-        /* RESET E CONFIGURAÇÕES BÁSICAS */
+        /* RESET AVANÇADO E VARIÁVEIS CSS */
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --secondary: #EC4899;
+            --accent: #10B981;
+            --dark: #0F0F1A;
+            --darker: #0A0A12;
+            --light: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--darker) 0%, #1E1B4B 100%);
+            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 35px 60px -15px rgba(139, 92, 246, 0.3);
+            --border-radius: 20px;
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: #0F0F1A;
-            color: #FFFFFF;
+            background: var(--dark);
+            color: var(--light);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
+            position: relative;
         }
-        
-        /* NAVEGAÇÃO - Mantendo o estilo moderno */
+
+        /* NAVEGAÇÃO MODERNA E GLASSMORPHISM */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 1.5rem 5%;
-            background: rgba(15, 15, 26, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition-smooth);
         }
-        
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            background: rgba(10, 10, 18, 0.95);
+            box-shadow: var(--shadow-lg);
+        }
+
         .nav-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.8rem;
             font-weight: 800;
-            color: #8B5CF6;
+            color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: var(--gradient-glass);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
+        .nav-logo::before {
+            content: '✈️';
+            font-size: 1.4rem;
+        }
+
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
-        
+
         .nav-link {
-            color: #E2E8F0;
+            color: var(--gray-300);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-smooth);
         }
-        
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .nav-link:hover {
-            color: #8B5CF6;
-        }
-        
-        .nav-button {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-button {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
         .nav-button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
         }
-        
-        /* HERO SECTION - Usando conteúdo da LP original */
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        /* HERO SECTION ULTRA MODERNA */
         .hero-section {
             min-height: 100vh;
-            padding: 8rem 5% 4rem;
+            padding: 12rem 5% 6rem;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero-content {
-            max-width: 700px;
+            max-width: 800px;
             z-index: 10;
             position: relative;
         }
-        
+
         .hero-badge {
-            display: inline-block;
-            background: rgba(139, 92, 246, 0.2);
-            color: #A78BFA;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--primary);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            animation: floatBadge 3s ease-in-out infinite;
         }
-        
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         .hero-title {
-            font-size: 3.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 4.2rem;
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #FFFFFF 0%, #A78BFA 100%);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--primary) 30%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
-        
+
         .hero-subtitle {
-            font-size: 1.25rem;
-            color: #CBD5E1;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
+            font-size: 1.35rem;
+            color: var(--gray-300);
+            margin-bottom: 3rem;
+            max-width: 650px;
+            line-height: 1.8;
         }
-        
+
+        .hero-button-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
         .hero-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--gradient-primary);
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            padding: 1.25rem 2.5rem;
+            border-radius: 16px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.125rem;
-            transition: all 0.3s;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
         .hero-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
         }
-        
-        /* SEÇÕES BÁSICAS */
+
+        .hero-button:hover::before {
+            left: 100%;
+        }
+
+        .hero-button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SEÇÕES MODERNAS */
         .section {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             position: relative;
         }
-        
-        .container {
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 2rem auto;
             max-width: 1200px;
+        }
+
+        .container {
+            max-width: 1280px;
             margin: 0 auto;
+            position: relative;
         }
-        
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-align: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
-        
+
+        .section-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
         .section-subtitle {
-            font-size: 1.25rem;
-            color: #94A3B8;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
+            font-size: 1.3rem;
+            color: var(--gray-300);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
         }
-        
-        /* CARDS - Estilo do design novo com conteúdo antigo */
+
+        /* CARDS ULTRA MODERNOS */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
             margin-top: 3rem;
         }
-        
+
         .card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.3s;
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            transform: scaleY(0);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: top;
+        }
+
         .card:hover {
-            transform: translateY(-10px);
-            border-color: #8B5CF6;
-            background: rgba(30, 41, 59, 0.8);
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #E2E8F0;
-        }
-        
-        .card-text {
-            color: #94A3B8;
-            line-height: 1.6;
-        }
-        
-        /* MODULES SECTION - Conteúdo original "O que você vai aprender" */
-        .module {
+            transform: translateY(-15px);
+            border-color: rgba(139, 92, 246, 0.3);
             background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
         }
-        
-        .module:hover {
-            border-color: #8B5CF6;
-            background: rgba(30, 41, 59, 0.8);
+
+        .card:hover::before {
+            transform: scaleY(1);
         }
-        
-        .module-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
-            border-radius: 15px;
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
+            border-radius: 18px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
         }
-        
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+        }
+
+        .card-text {
+            color: var(--gray-300);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* MÓDULOS COM DESIGN DE CORTE MODERNO */
+        .modules-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .module {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            transition: var(--transition-smooth);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .module:hover {
+            transform: translateX(10px);
+            border-color: rgba(139, 92, 246, 0.3);
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .module:hover::before {
+            transform: scaleX(1);
+        }
+
+        .module-number {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .module-content h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
         .bonus-module {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.15));
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
-        
+
+        /* CTA SECTION MODERNA */
+        .cta-section {
+            background: var(--gradient-dark);
+            border-radius: 30px;
+            padding: 6rem;
+            text-align: center;
+            margin: 6rem auto;
+            max-width: 1000px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray-300);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.5rem 3.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .guarantee-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* FAQ MODERNO */
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .faq-question {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--gray-300);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        /* FOOTER MODERNO */
+        footer {
+            background: var(--darker);
+            padding: 5rem 5% 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-description {
+            color: var(--gray-400);
+            line-height: 1.8;
+            max-width: 400px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--gray-500);
+            font-size: 0.9rem;
+        }
+
         /* CANVAS 3D */
         #threejs-canvas {
             position: fixed;
@@ -258,71 +747,149 @@
             z-index: -1;
             pointer-events: none;
         }
-        
-        /* CTA SECTION */
-        .cta-section {
-            background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
-            border-radius: 30px;
-            padding: 5rem;
-            text-align: center;
-            margin: 4rem auto;
-            max-width: 1000px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* FAQ - Conteúdo original */
-        .faq-item {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .faq-item:hover {
-            border-color: #8B5CF6;
-        }
-        
-        /* FOOTER */
-        footer {
-            background: #0F172A;
-            padding: 4rem 5%;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* RESPONSIVIDADE */
-        @media (max-width: 768px) {
+
+        /* RESPONSIVIDADE AVANÇADA */
+        @media (max-width: 1200px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .cta-section {
+                padding: 5rem 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
             }
             
             .section-title {
                 font-size: 2.5rem;
             }
             
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
             .nav-links {
                 display: none;
             }
             
-            .cta-section {
-                padding: 3rem 1.5rem;
+            .module {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .card, .module {
+            .section {
+                padding: 6rem 5%;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-button-group {
+                flex-direction: column;
+            }
+            
+            .cta-section {
+                padding: 4rem 2rem;
+                border-radius: 20px;
+            }
+            
+            .cta-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-button,
+            .cta-button {
+                padding: 1rem 2rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card,
+            .module,
+            .faq-item {
                 padding: 2rem;
             }
+        }
+
+        /* ANIMAÇÕES GLOBAIS */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* SCROLLBAR PERSONALIZADA */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
         }
     </style>
 </head>
@@ -330,880 +897,1010 @@
     <!-- Canvas 3D -->
     <canvas id="threejs-canvas"></canvas>
     
-    <!-- Navegação -->
+    <!-- Navegação Moderna -->
     <nav class="navbar">
-        <a href="#" class="nav-logo">🌎 Minha Jornada USA</a>
+        <a href="#" class="nav-logo">Minha Jornada USA</a>
         <div class="nav-links">
             <a href="#sobre" class="nav-link">Sobre</a>
             <a href="#conteudo" class="nav-link">Conteúdo</a>
+            <a href="#beneficios" class="nav-link">Benefícios</a>
             <a href="#faq" class="nav-link">FAQ</a>
-            <a href="#cta" class="nav-button">Começar Agora</a>
+            <a href="#cta" class="nav-button">
+                <i class="ri-rocket-line"></i>
+                Começar Agora
+            </a>
         </div>
     </nav>
     
-    <!-- Hero Section - CONTEÚDO ORIGINAL -->
+    <!-- Hero Section Ultra Moderna -->
     <section class="hero-section">
-        <div class="hero-content">
-            <span class="hero-badge">🎯 Criado por quem vive o programa nos EUA</span>
+        <div class="hero-content fade-in">
+            <div class="hero-badge">
+                <i class="ri-shield-check-fill"></i>
+                Criado por quem vive o programa nos EUA
+            </div>
+            
             <h1 class="hero-title">
-                Realize seu sonho de conhecer os EUA<br>e ainda tenha bolsa de estudos e moradia garantida!
+                Realize seu sonho de conhecer os EUA<br>
+                <span class="section-gradient">com bolsa de estudos e moradia garantida!</span>
             </h1>
+            
             <p class="hero-subtitle">
                 Do zero ao embarque: preparação completa e honesta, com quem já viveu cada etapa do processo!
+                Transforme sua vida com uma experiência cultural única nos Estados Unidos.
             </p>
-            <a href="#cta" class="hero-button">Eu Quero Participar →</a>
             
-            <div style="margin-top: 3rem; display: flex; gap: 2rem; flex-wrap: wrap;">
-                <div>
-                    <div style="font-size: 2rem; font-weight: 800; color: #8B5CF6;">500+</div>
-                    <div style="color: #94A3B8;">Candidatas Preparadas</div>
+            <div class="hero-button-group">
+                <a href="#cta" class="hero-button">
+                    <i class="ri-rocket-line"></i>
+                    Eu Quero Participar
+                </a>
+                <a href="#conteudo" class="hero-button hero-button-secondary">
+                    <i class="ri-play-circle-line"></i>
+                    Ver Conteúdo
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Candidatas Preparadas</div>
                 </div>
-                <div>
-                    <div style="font-size: 2rem; font-weight: 800; color: #EC4899;">98%</div>
-                    <div style="color: #94A3B8;">Taxa de Satisfação</div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Satisfação</div>
                 </div>
-                <div>
-                    <div style="font-size: 2rem; font-weight: 800; color: #10B981;">100%</div>
-                    <div style="color: #94A3B8;">Experiência Real</div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Experiência Real</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Suporte Individual</div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção: Problemas - CONTEÚDO ORIGINAL -->
+
+    <!-- Seção: Problemas - Design Moderno -->
     <section id="sobre" class="section">
         <div class="container">
-            <h2 class="section-title">Você está sentindo isso?</h2>
-            <p class="section-subtitle">
-                Sabemos exatamente o que passa pela sua cabeça
-            </p>
+            <div class="section-header">
+                <span class="section-badge">Identificamos</span>
+                <h2 class="section-title">Você está sentindo <span class="section-gradient">isso?</span></h2>
+                <p class="section-subtitle">
+                    Sabemos exatamente o que passa pela sua cabeça quando pensa em se tornar Au Pair
+                </p>
+            </div>
             
             <div class="cards-grid">
-                <div class="card">
+                <div class="card fade-in" style="animation-delay: 0.1s">
                     <div class="card-icon">😰</div>
                     <h3 class="card-title">Não sei por onde começar</h3>
                     <p class="card-text">
-                        Informações espalhadas, nada estruturado. Qual é realmente o primeiro passo?
+                        Informações espalhadas, nada estruturado. Qual é realmente o primeiro passo para se tornar uma Au Pair nos EUA?
                     </p>
                 </div>
                 
-                <div class="card">
+                <div class="card fade-in" style="animation-delay: 0.2s">
                     <div class="card-icon">⏰</div>
                     <h3 class="card-title">Medo de perder tempo</h3>
                     <p class="card-text">
-                        E se eu investir meses e for negada? E se escolher errado a agência ou família?
+                        E se eu investir meses e for negada? Como escolher a agência certa e a família perfeita?
                     </p>
                 </div>
                 
-                <div class="card">
+                <div class="card fade-in" style="animation-delay: 0.3s">
                     <div class="card-icon">🗣️</div>
                     <h3 class="card-title">Inglês inseguro</h3>
                     <p class="card-text">
-                        Como falar sobre cuidar de crianças em inglês durante a entrevista?
+                        Como falar sobre cuidar de crianças em inglês durante a entrevista? O vocabulário específico te assusta?
                     </p>
                 </div>
                 
-                <div class="card">
+                <div class="card fade-in" style="animation-delay: 0.4s">
                     <div class="card-icon">🤔</div>
                     <h3 class="card-title">Informações confusas</h3>
                     <p class="card-text">
-                        Promessas irreais vs relatos assustadores. Em quem confiar?
+                        Promessas irreais vs relatos assustadores. Em quem confiar nessa jornada importante?
                     </p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção: Solução - CONTEÚDO ORIGINAL -->
-    <section class="section" style="background: rgba(15, 23, 42, 0.5);">
+
+    <!-- Divisor Visual -->
+    <div class="section-divider"></div>
+
+    <!-- Seção: Solução - Design Avançado -->
+    <section class="section">
         <div class="container">
-            <h2 class="section-title">A preparação que você precisa</h2>
-            <p class="section-subtitle">
-                Tudo que você precisa saber, organizado em um único lugar
-            </p>
+            <div class="section-header">
+                <span class="section-badge">Solução</span>
+                <h2 class="section-title">A preparação <span class="section-gradient">que você precisa</span></h2>
+                <p class="section-subtitle">
+                    Tudo que você precisa saber, organizado em um único lugar com metodologia comprovada
+                </p>
+            </div>
             
             <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">📚</div>
+                <div class="card fade-in">
+                    <div class="card-icon">
+                        <i class="ri-book-open-line"></i>
+                    </div>
                     <h3 class="card-title">Curso Online Completo</h3>
                     <p class="card-text">
                         Do funcionamento do programa até a preparação final. Tudo estruturado em módulos claros e objetivos.
                     </p>
-                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Acesso vitalício ao conteúdo</span>
+                    <div style="margin-top: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Acesso vitalício ao conteúdo</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Atualizações constantes incluídas</span>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Atualizações constantes incluídas</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Material de apoio e templates</span>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Material de apoio e templates</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="card">
-                    <div class="card-icon">👥</div>
+                <div class="card fade-in">
+                    <div class="card-icon">
+                        <i class="ri-user-voice-line"></i>
+                    </div>
                     <h3 class="card-title">Consultoria Individual</h3>
                     <p class="card-text">
                         Quer um acompanhamento mais próximo? Oferecemos suporte personalizado para sua jornada.
                     </p>
-                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Análise completa do seu perfil</span>
+                    <div style="margin-top: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Análise completa do seu perfil</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Simulações de entrevista em inglês</span>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Simulações de entrevista em inglês</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="color: #10B981; font-weight: bold;">✓</span>
-                            <span style="color: #94A3B8;">Revisão de documentos e aplicação</span>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="ri-checkbox-circle-fill" style="color: var(--accent);"></i>
+                            <span style="color: var(--gray-300);">Revisão de documentos e aplicação</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção: Benefícios - CONTEÚDO ORIGINAL -->
-    <section class="section">
+
+    <!-- Seção: Benefícios -->
+    <section id="beneficios" class="section">
         <div class="container">
-            <h2 class="section-title">Por que este curso é diferente?</h2>
-            <p class="section-subtitle">Preparação de verdade, sem enrolação</p>
+            <div class="section-header">
+                <span class="section-badge">Diferenciais</span>
+                <h2 class="section-title">Por que este curso é <span class="section-gradient">diferente?</span></h2>
+                <p class="section-subtitle">Preparação de verdade, sem enrolação ou promessas vazias</p>
+            </div>
             
             <div class="cards-grid">
                 <div class="card">
-                    <div class="card-icon">✨</div>
+                    <div class="card-icon">
+                        <i class="ri-sparkling-2-line"></i>
+                    </div>
                     <h3 class="card-title">Experiência Real</h3>
                     <p class="card-text">
-                        Criado por quem está vivendo o programa agora nos EUA. Não é teoria.
+                        Criado por quem está vivendo o programa agora nos EUA. Não é teoria, é prática comprovada.
                     </p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">🎯</div>
+                    <div class="card-icon">
+                        <i class="ri-target-line"></i>
+                    </div>
                     <h3 class="card-title">Sem Promessas Falsas</h3>
                     <p class="card-text">
-                        Honestidade total sobre o processo e suas dificuldades reais.
+                        Honestidade total sobre o processo e suas dificuldades reais. Transparência em primeiro lugar.
                     </p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">🗣️</div>
+                    <div class="card-icon">
+                        <i class="ri-chat-3-line"></i>
+                    </div>
                     <h3 class="card-title">Inglês Aplicado</h3>
                     <p class="card-text">
-                        Vocabulário específico para entrevistas e o dia a dia como Au Pair.
+                        Vocabulário específico para entrevistas e o dia a dia como Au Pair. Foque no que realmente importa.
                     </p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">🧭</div>
+                    <div class="card-icon">
+                        <i class="ri-guide-line"></i>
+                    </div>
                     <h3 class="card-title">Suporte Real</h3>
                     <p class="card-text">
-                        Você não estará sozinha. Acompanhamento ao longo do processo.
+                        Você não estará sozinha. Acompanhamento ao longo do processo por quem já passou por isso.
                     </p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção: Conteúdo - CONTEÚDO ORIGINAL -->
+
+    <!-- Seção: Conteúdo - Design Modular Moderno -->
     <section id="conteudo" class="section">
         <div class="container">
-            <h2 class="section-title">O que você vai aprender</h2>
-            <p class="section-subtitle">Conteúdo completo, do básico ao avançado</p>
+            <div class="section-header">
+                <span class="section-badge">Conteúdo</span>
+                <h2 class="section-title">O que você vai <span class="section-gradient">aprender</span></h2>
+                <p class="section-subtitle">Conteúdo completo, do básico ao avançado, em 5 módulos principais + bônus</p>
+            </div>
             
-            <div>
-                <div class="module">
+            <div class="modules-grid">
+                <div class="module fade-in">
                     <div class="module-number">01</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Entendendo o programa Au Pair
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Funcionamento completo, requisitos oficiais, tipos de visto, agências credenciadas e como o processo realmente funciona.
-                    </p>
+                    <div class="module-content">
+                        <h3>Entendendo o programa Au Pair</h3>
+                        <p>
+                            Funcionamento completo, requisitos oficiais, tipos de visto, agências credenciadas e como o processo realmente funciona na prática.
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="module">
+                <div class="module fade-in" style="animation-delay: 0.1s">
                     <div class="module-number">02</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Preparação do perfil e documentação
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Como montar um perfil atrativo, documentos necessários, fotos, carta de apresentação e o que as famílias realmente procuram.
-                    </p>
+                    <div class="module-content">
+                        <h3>Preparação do perfil e documentação</h3>
+                        <p>
+                            Como montar um perfil atrativo, documentos necessários, fotos profissionais, carta de apresentação e o que as famílias realmente procuram.
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="module">
+                <div class="module fade-in" style="animation-delay: 0.2s">
                     <div class="module-number">03</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Inglês para entrevistas
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Vocabulário específico, frases comuns, como responder perguntas difíceis e simulações práticas de entrevistas reais.
-                    </p>
+                    <div class="module-content">
+                        <h3>Inglês para entrevistas</h3>
+                        <p>
+                            Vocabulário específico, frases comuns, como responder perguntas difíceis e simulações práticas de entrevistas reais com famílias americanas.
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="module">
+                <div class="module fade-in" style="animation-delay: 0.3s">
                     <div class="module-number">04</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Escolhendo a família certa
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Red flags, perguntas essenciais, como avaliar compatibilidade, negociação de tarefas e expectativas realistas.
-                    </p>
+                    <div class="module-content">
+                        <h3>Escolhendo a família certa</h3>
+                        <p>
+                            Red flags, perguntas essenciais, como avaliar compatibilidade, negociação de tarefas e expectativas realistas para uma experiência positiva.
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="module">
+                <div class="module fade-in" style="animation-delay: 0.4s">
                     <div class="module-number">05</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Preparação final e embarque
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        O que levar, primeiras semanas nos EUA, adaptação cultural, gestão financeira e vida real no programa.
-                    </p>
+                    <div class="module-content">
+                        <h3>Preparação final e embarque</h3>
+                        <p>
+                            O que levar, primeiras semanas nos EUA, adaptação cultural, gestão financeira e vida real no programa de Au Pair.
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="module bonus-module">
+                <div class="module bonus-module fade-in" style="animation-delay: 0.5s">
                     <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🎁</div>
-                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Bônus: Erros mais comuns
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Lista completa dos erros que as candidatas cometem e como evitar cada um deles para maximizar suas chances.
-                    </p>
+                    <div class="module-content">
+                        <h3>Bônus Exclusivo: Erros mais comuns</h3>
+                        <p>
+                            Lista completa dos erros que as candidatas cometem e como evitar cada um deles para maximizar suas chances de aprovação.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção: FAQ - CONTEÚDO ORIGINAL -->
+
+    <!-- CTA Section Ultra Moderna -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-section float">
+                <div class="cta-content">
+                    <span class="section-badge">Oportunidade Limitada</span>
+                    <h2 class="cta-title">
+                        Comece Sua Jornada<br>
+                        <span class="section-gradient">Hoje Mesmo</span>
+                    </h2>
+                    
+                    <p class="cta-subtitle">
+                        Pare de adiar seu sonho por medo ou falta de informação. Dê o primeiro passo com segurança e clareza, 
+                        guiada por quem já trilhou este caminho e conhece cada detalhe do processo.
+                    </p>
+                    
+                    <a href="#cta" class="cta-button">
+                        <i class="ri-rocket-line"></i>
+                        🚀 Eu quero ser Au Pair
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                    
+                    <div class="guarantee-badge">
+                        <i class="ri-shield-check-fill"></i>
+                        <span>
+                            <strong>Garantia de 7 dias</strong> - Teste sem riscos ou devolvemos seu dinheiro
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Moderno -->
     <section id="faq" class="section">
         <div class="container">
-            <h2 class="section-title">Perguntas Frequentes</h2>
-            <p class="section-subtitle">Respondemos suas dúvidas mais comuns</p>
+            <div class="section-header">
+                <span class="section-badge">FAQ</span>
+                <h2 class="section-title">Perguntas <span class="section-gradient">Frequentes</span></h2>
+                <p class="section-subtitle">Respondemos suas dúvidas mais comuns de forma clara e honesta</p>
+            </div>
             
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-grid">
                 <div class="faq-item">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Preciso ter inglês fluente?
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Não. O programa exige inglês intermediário, e o curso te prepara exatamente para isso. Ensinamos o inglês aplicado que você precisa para o dia a dia e para as entrevistas.
-                    </p>
+                    <div class="faq-question">
+                        <span>Preciso ter inglês fluente?</span>
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não. O programa exige inglês intermediário, e o curso te prepara exatamente para isso. Ensinamos o inglês aplicado que você precisa para o dia a dia e para as entrevistas, focando no vocabulário específico de cuidados com crianças.</p>
+                    </div>
                 </div>
                 
                 <div class="faq-item">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Este curso substitui a agência?
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Não. Você ainda precisará escolher uma agência oficial credenciada. O curso te prepara para fazer as melhores escolhas, entender o processo e ter sucesso em cada etapa.
-                    </p>
+                    <div class="faq-question">
+                        <span>Este curso substitui a agência?</span>
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não. Você ainda precisará escolher uma agência oficial credenciada. O curso te prepara para fazer as melhores escolhas, entender o processo e ter sucesso em cada etapa, aumentando significativamente suas chances de aprovação.</p>
+                    </div>
                 </div>
                 
                 <div class="faq-item">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Quanto tempo leva para completar o curso?
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        O conteúdo pode ser consumido em poucas semanas, mas você tem acesso vitalício para revisitar sempre que precisar. Cada pessoa avança no seu próprio ritmo.
-                    </p>
+                    <div class="faq-question">
+                        <span>Quanto tempo leva para completar o curso?</span>
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O conteúdo pode ser consumido em poucas semanas, mas você tem acesso vitalício para revisitar sempre que precisar. Cada pessoa avança no seu próprio ritmo, e o curso é projetado para ser flexível conforme sua disponibilidade.</p>
+                    </div>
                 </div>
                 
                 <div class="faq-item">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Vocês garantem minha aprovação?
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        Não prometemos aprovação garantida porque isso seria desonesto. Prometemos te dar a melhor preparação possível, baseada em experiência real e honesta sobre o processo.
-                    </p>
+                    <div class="faq-question">
+                        <span>Vocês garantem minha aprovação?</span>
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não prometemos aprovação garantida porque isso seria desonesto. Prometemos te dar a melhor preparação possível, baseada em experiência real e honesta sobre o processo. Sua dedicação é fundamental para o sucesso.</p>
+                    </div>
                 </div>
                 
                 <div class="faq-item">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: #E2E8F0;">
-                        Como funciona a consultoria individual?
-                    </h3>
-                    <p style="color: #94A3B8; line-height: 1.6;">
-                        A consultoria é oferecida separadamente do curso. Inclui análise do seu perfil, simulações de entrevista personalizadas e revisão de documentos. Entre em contato para mais detalhes.
-                    </p>
+                    <div class="faq-question">
+                        <span>Como funciona a consultoria individual?</span>
+                        <i class="ri-add-line"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A consultoria é oferecida separadamente do curso. Inclui análise completa do seu perfil, simulações de entrevista personalizadas, revisão de documentos e acompanhamento individualizado. Entre em contato para mais detalhes sobre pacotes disponíveis.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- CTA Section - CONTEÚDO ORIGINAL -->
-    <section id="cta" class="section">
-      <div class="container">
-          <!-- Card CTA Aprimorado -->
-          <div style="background: linear-gradient(135deg, rgba(30, 27, 75, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%); 
-                      border-radius: 30px; 
-                      padding: 4rem; 
-                      text-align: center; 
-                      margin: 4rem auto; 
-                      max-width: 1000px;
-                      border: 1px solid rgba(139, 92, 246, 0.3);
-                      position: relative;
-                      overflow: hidden;">
-              
-              <!-- Efeito de brilho animado -->
-              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-                          background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
-                          animation: pulseGlow 3s infinite alternate;
-                          z-index: 1;"></div>
-              
-              <!-- Elementos flutuantes decorativos -->
-              <div style="position: absolute; width: 100px; height: 100px; border-radius: 50%; 
-                          background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
-                          filter: blur(40px); top: 20px; left: 20px; z-index: 1;"></div>
-              <div style="position: absolute; width: 150px; height: 150px; border-radius: 50%; 
-                          background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
-                          filter: blur(50px); bottom: 20px; right: 20px; z-index: 1;"></div>
-              
-              <!-- Conteúdo -->
-              <div style="position: relative; z-index: 2;">
-                  <!-- Ícone decorativo -->
-                  <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #8B5CF6, #EC4899); 
-                              border-radius: 20px; margin: 0 auto 2rem; display: flex; align-items: center; 
-                              justify-content: center; font-size: 2.5rem; animation: floatIcon 3s ease-in-out infinite;">
-                      🚀
-                  </div>
-                  
-                  <!-- Título -->
-                  <h2 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 1.5rem; 
-                             background: linear-gradient(135deg, #FFFFFF, #A78BFA);
-                             -webkit-background-clip: text;
-                             -webkit-text-fill-color: transparent;">
-                      Comece Sua Jornada Hoje
-                  </h2>
-                  
-                  <!-- Subtítulo -->
-                  <p style="font-size: 1.3rem; color: #CBD5E1; margin-bottom: 3rem; max-width: 700px; 
-                            margin-left: auto; margin-right: auto; line-height: 1.6;">
-                      Pare de adiar seu sonho por medo ou falta de informação. 
-                      <span style="color: #A78BFA; font-weight: 600;">Dê o primeiro passo com segurança e clareza.</span>
-                  </p>
-                  
-                  <!-- Botão Principal Aprimorado -->
-                  <a href="#cta" style="display: inline-block; 
-                                        background: linear-gradient(135deg, #8B5CF6, #EC4899);
-                                        color: white; 
-                                        padding: 1.5rem 3.5rem; 
-                                        border-radius: 16px; 
-                                        text-decoration: none; 
-                                        font-weight: 700; 
-                                        font-size: 1.3rem;
-                                        transition: all 0.3s ease;
-                                        position: relative;
-                                        overflow: hidden;
-                                        margin-bottom: 2.5rem;
-                                        border: 2px solid rgba(255, 255, 255, 0.1);
-                                        box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);">
-                      
-                      <!-- Efeito de brilho interno -->
-                      <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; 
-                                   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                                   transition: left 0.6s;"></span>
-                      
-                      <!-- Texto do botão -->
-                      <span style="position: relative; z-index: 2; display: flex; align-items: center; gap: 1rem;">
-                          <span>🚀 Eu quero ser Au Pair</span>
-                          <svg style="width: 24px; height: 24px; transition: transform 0.3s;" viewBox="0 0 24 24" fill="none">
-                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                      </span>
-                  </a>
-                  
-                  <!-- Garantia com ícone -->
-                  <div style="display: inline-flex; align-items: center; gap: 0.75rem; 
-                              padding: 0.75rem 1.5rem; 
-                              background: rgba(255, 255, 255, 0.05); 
-                              border-radius: 12px; 
-                              border: 1px solid rgba(255, 255, 255, 0.1);">
-                      <svg style="width: 20px; height: 20px; color: #10B981;" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                      </svg>
-                      <span style="color: #94A3B8; font-weight: 500;">
-                          <span style="color: #10B981; font-weight: 600;">Garantia de 7 dias</span> para testar sem riscos
-                      </span>
-                  </div>
-                  
-                  <!-- Estatísticas extras -->
-                  <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; 
-                              padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); flex-wrap: wrap;">
-                      <div>
-                          <div style="font-size: 1.5rem; font-weight: 800; color: #8B5CF6; margin-bottom: 0.5rem;">
-                              ⚡ Acesso Imediato
-                          </div>
-                          <div style="color: #94A3B8; font-size: 0.9rem;">
-                              Comece hoje mesmo
-                          </div>
-                      </div>
-                      <div>
-                          <div style="font-size: 1.5rem; font-weight: 800; color: #EC4899; margin-bottom: 0.5rem;">
-                              💬 Suporte Individual
-                          </div>
-                          <div style="color: #94A3B8; font-size: 0.9rem;">
-                              Tire todas as dúvidas
-                          </div>
-                      </div>
-                      <div>
-                          <div style="font-size: 1.5rem; font-weight: 800; color: #10B981; margin-bottom: 0.5rem;">
-                              📚 Conteúdo Vitalício
-                          </div>
-                          <div style="color: #94A3B8; font-size: 0.9rem;">
-                              Atualizações gratuitas
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          
-          <!-- Adicione estas animações no final do CSS -->
-          <style>
-              @keyframes pulseGlow {
-                  0% { opacity: 0.3; }
-                  100% { opacity: 0.7; }
-              }
-              
-              @keyframes floatIcon {
-                  0%, 100% { transform: translateY(0) scale(1); }
-                  50% { transform: translateY(-10px) scale(1.05); }
-              }
-              
-              /* Efeito hover no botão */
-              #cta a:hover {
-                  transform: translateY(-5px);
-                  box-shadow: 0 30px 60px rgba(139, 92, 246, 0.6);
-              }
-              
-              #cta a:hover span:first-child {
-                  left: 100%;
-              }
-              
-              #cta a:hover svg {
-                  transform: translateX(5px);
-              }
-          </style>
-      </div>
-  </section>
-    
-    <!-- Footer - CONTEÚDO ORIGINAL -->
+
+    <!-- Footer Moderno -->
     <footer>
         <div class="footer-content">
-            <div style="margin-bottom: 3rem;">
-                <div style="font-size: 2rem; font-weight: 800; color: #8B5CF6; margin-bottom: 1rem;">Minha Jornada USA</div>
-                <p style="color: #94A3B8; max-width: 400px;">
-                    Conectando candidatas brasileiras a experiências culturais transformadoras nos EUA.
-                </p>
-            </div>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <div style="display: flex; gap: 2rem; color: #94A3B8;">
-                    <a href="#" style="color: #94A3B8; text-decoration: none;">Política de Privacidade</a>
-                    <a href="#" style="color: #94A3B8; text-decoration: none;">Termos de Uso</a>
-                    <a href="#" style="color: #94A3B8; text-decoration: none;">Contato</a>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">🌍 Minha Jornada USA</a>
+                    <p class="footer-description">
+                        Conectando candidatas brasileiras a experiências culturais transformadoras nos EUA. 
+                        Preparação honesta e completa para o programa Au Pair.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="ri-whatsapp-line"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <div style="display: flex; gap: 1rem;">
-                    <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #94A3B8; transition: all 0.3s;">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                    <a href="#" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #94A3B8; transition: all 0.3s;">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 600;">Links Rápidos</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="#sobre" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Sobre</a>
+                        <a href="#conteudo" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Conteúdo</a>
+                        <a href="#beneficios" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Benefícios</a>
+                        <a href="#faq" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">FAQ</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 600;">Legal</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <a href="#" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Política de Privacidade</a>
+                        <a href="#" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Termos de Uso</a>
+                        <a href="#" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Política de Reembolso</a>
+                        <a href="#" style="color: var(--gray-300); text-decoration: none; transition: var(--transition-smooth);">Contato</a>
+                    </div>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 2rem; color: #64748B; font-size: 0.875rem;">
-                © 2026 Minha Jornada USA. Todos os direitos reservados.
+            <div class="footer-copyright">
+                © 2026 Minha Jornada USA. Todos os direitos reservados. | Desenvolvido com ❤️ para futuras Au Pairs
             </div>
         </div>
     </footer>
-    
-    <!-- JavaScript - TUDO EM UM SÓ -->
+
+    <!-- JavaScript Otimizado -->
     <script>
         // ============================================
-        // 1. THREE.JS SIMPLIFICADO E FUNCIONAL
+        // 1. THREE.JS CENA 3D LEVE E EFICIENTE
         // ============================================
         
-        function initThreeJS() {
-            console.log('Iniciando Three.js...');
+        class Scene3D {
+            constructor() {
+                this.init();
+                this.createScene();
+                this.addLights();
+                this.createMinimalParticles(); // REDUZIDO
+                this.createGlobe();
+                this.animate();
+                this.handleResize();
+                this.addMouseInteraction();
+            }
             
-            // Configuração básica
-            const canvas = document.getElementById('threejs-canvas');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            init() {
+                this.canvas = document.getElementById('threejs-canvas');
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({
+                    canvas: this.canvas,
+                    alpha: true,
+                    antialias: true,
+                    powerPreference: 'high-performance'
+                });
+                
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                
+                this.camera.position.z = 15;
+                this.clock = new THREE.Clock();
+                
+                // Mouse position for interaction
+                this.mouse = new THREE.Vector2();
+                this.targetCameraPosition = new THREE.Vector3(0, 0, 15);
+            }
             
-            // Configurar renderer
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            createScene() {
+                // Scene fog for depth
+                this.scene.fog = new THREE.Fog(0x0F0F1A, 10, 50);
+            }
             
-            // Posicionar câmera
-            camera.position.z = 15;
+            addLights() {
+                // Ambient light
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                this.scene.add(ambientLight);
+                
+                // Directional light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+                directionalLight.position.set(10, 20, 15);
+                this.scene.add(directionalLight);
+                
+                // Point lights for accent
+                const pointLight1 = new THREE.PointLight(0x8B5CF6, 2, 50);
+                pointLight1.position.set(10, 5, 5);
+                this.scene.add(pointLight1);
+                
+                const pointLight2 = new THREE.PointLight(0xEC4899, 1, 50);
+                pointLight2.position.set(-10, -5, 5);
+                this.scene.add(pointLight2);
+            }
             
-            // Luz básica
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
+            createMinimalParticles() {
+                // CRIADO COM APENAS 150 PARTÍCULAS (REDUZIDO DE 1500)
+                const particleCount = 150; // REDUZIDO SIGNIFICATIVAMENTE
+                const particles = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                const sizes = new Float32Array(particleCount);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    // Position in a spherical shape
+                    const radius = 10 + Math.random() * 10;
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos((Math.random() * 2) - 1);
+                    
+                    positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                    positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                    positions[i * 3 + 2] = radius * Math.cos(phi);
+                    
+                    // Colors based on brand gradient
+                    colors[i * 3] = 0.5 + Math.random() * 0.5; // R
+                    colors[i * 3 + 1] = 0.3 + Math.random() * 0.3; // G
+                    colors[i * 3 + 2] = 0.8 + Math.random() * 0.2; // B
+                    
+                    sizes[i] = Math.random() * 0.2 + 0.1; // Aumentado um pouco para compensar menos partículas
+                }
+                
+                particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                particles.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+                
+                const particleMaterial = new THREE.PointsMaterial({
+                    size: 0.15, // Aumentado
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.6, // Reduzido um pouco
+                    sizeAttenuation: true
+                });
+                
+                this.particleSystem = new THREE.Points(particles, particleMaterial);
+                this.scene.add(this.particleSystem);
+            }
             
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(10, 20, 5);
-            scene.add(directionalLight);
+            createGlobe() {
+                // Create Earth globe
+                const globeGeometry = new THREE.SphereGeometry(4, 32, 32); // Reduzida resolução
+                const globeMaterial = new THREE.MeshPhysicalMaterial({
+                    color: 0x1E40AF,
+                    transparent: true,
+                    opacity: 0.1,
+                    roughness: 0.5,
+                    metalness: 0.5,
+                    wireframe: true
+                });
+                
+                this.globe = new THREE.Mesh(globeGeometry, globeMaterial);
+                this.scene.add(this.globe);
+                
+                // Add country points
+                this.createCountryPoint(0x10B981, -2, 1, 2); // Brazil
+                this.createCountryPoint(0xEC4899, 2, 1, -2); // USA
+                
+                // Create connection line
+                this.createConnectionLine();
+            }
             
-            // ============================================
-            // CRIAR ELEMENTOS 3D TEMÁTICOS PARA AU PAIR
-            // ============================================
-            
-            // 1. Globo terrestre (conexão Brasil-USA)
-            const globeGeometry = new THREE.SphereGeometry(4, 32, 32);
-            const globeMaterial = new THREE.MeshPhongMaterial({
-                color: 0x1E40AF,
-                transparent: true,
-                opacity: 0.3,
-                wireframe: true
-            });
-            const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-            scene.add(globe);
-            
-            // 2. Pontos no globo (Brasil e USA)
-            function createCountryPoint(color, x, y, z) {
-                const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+            createCountryPoint(color, x, y, z) {
+                const geometry = new THREE.SphereGeometry(0.2, 16, 16);
                 const material = new THREE.MeshBasicMaterial({ color });
                 const point = new THREE.Mesh(geometry, material);
+                
+                // Position relative to globe
                 point.position.set(x, y, z);
-                globe.add(point);
+                this.globe.add(point);
+                
+                // Add glow effect (simplificado)
+                const glowGeometry = new THREE.SphereGeometry(0.4, 8, 8); // Reduzida resolução
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                point.add(glow);
+                
+                // Animation
+                point.userData = {
+                    originalScale: 1,
+                    pulseSpeed: 2 + Math.random(),
+                    pulseAmount: 0.2 + Math.random() * 0.3
+                };
+                
                 return point;
             }
             
-            const brazilPoint = createCountryPoint(0x10B981, -2, 1, 2);  // Verde
-            const usaPoint = createCountryPoint(0xEC4899, 2, 1, -2);     // Rosa
-            
-            // 3. Linha conectando os pontos (jornada)
-            const curve = new THREE.CatmullRomCurve3([
-                new THREE.Vector3(-2, 1, 2),
-                new THREE.Vector3(0, 3, 0),
-                new THREE.Vector3(2, 1, -2)
-            ]);
-            
-            const points = curve.getPoints(50);
-            const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x8B5CF6,
-                transparent: true,
-                opacity: 0.6
-            });
-            const connectionLine = new THREE.Line(lineGeometry, lineMaterial);
-            scene.add(connectionLine);
-            
-            // 4. Partículas flutuantes (representando candidatas)
-            const particleCount = 500;
-            const particles = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-            
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                // Posições em uma esfera
-                const radius = 8;
-                const theta = Math.random() * Math.PI * 2;
-                const phi = Math.acos((Math.random() * 2) - 1);
+            createConnectionLine() {
+                // Create curved line between points
+                const curve = new THREE.CatmullRomCurve3([
+                    new THREE.Vector3(-2, 1, 2),
+                    new THREE.Vector3(0, 3, 0),
+                    new THREE.Vector3(2, 1, -2)
+                ]);
                 
-                positions[i] = radius * Math.sin(phi) * Math.cos(theta);
-                positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
-                positions[i + 2] = radius * Math.cos(phi);
+                const points = curve.getPoints(50); // Reduzido
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const material = new THREE.LineBasicMaterial({
+                    color: 0x8B5CF6,
+                    transparent: true,
+                    opacity: 0.4,
+                    linewidth: 2
+                });
                 
-                // Cores em tons da marca
-                colors[i] = 0.5 + Math.random() * 0.3;      // R
-                colors[i + 1] = 0.2 + Math.random() * 0.2;  // G
-                colors[i + 2] = 0.8 + Math.random() * 0.2;  // B
+                this.connectionLine = new THREE.Line(geometry, material);
+                this.scene.add(this.connectionLine);
+                
+                // Add moving dots along the line (reduzido)
+                this.createMovingDots(curve);
             }
             
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            
-            const particleMaterial = new THREE.PointsMaterial({
-                size: 0.05,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.6
-            });
-            
-            const particleSystem = new THREE.Points(particles, particleMaterial);
-            scene.add(particleSystem);
-            
-            // 5. Avião voando (simbolizando a viagem)
-            const planeGeometry = new THREE.ConeGeometry(0.2, 0.5, 3);
-            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
-            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            scene.add(plane);
-            
-            // Posicionar avião no início da curva
-            plane.position.copy(curve.getPointAt(0));
-            
-            // ============================================
-            // ANIMAÇÕES
-            // ============================================
-            
-            // Animar rotação do globo
-            let globeRotation = 0;
-            
-            // Animar avião seguindo a curva
-            let planeProgress = 0;
-            
-            // Interação com mouse
-            let mouseX = 0;
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
-            
-            // Função de animação
-            function animate() {
-                requestAnimationFrame(animate);
+            createMovingDots(curve) {
+                this.movingDots = [];
+                const dotCount = 3; // REDUZIDO de 5 para 3
                 
-                // Rotação suave do globo
-                globeRotation += 0.002;
-                globe.rotation.y = globeRotation;
-                
-                // Rotação das partículas
-                particleSystem.rotation.y += 0.001;
-                
-                // Mover avião ao longo da curva
-                planeProgress += 0.002;
-                if (planeProgress > 1) planeProgress = 0;
-                
-                const planePosition = curve.getPointAt(planeProgress);
-                plane.position.copy(planePosition);
-                
-                // Olhar para frente
-                const tangent = curve.getTangentAt(planeProgress);
-                plane.lookAt(plane.position.clone().add(tangent));
-                
-                // Suave movimento da câmera com mouse
-                camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
-                camera.position.y += (mouseY * 3 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                renderer.render(scene, camera);
+                for (let i = 0; i < dotCount; i++) {
+                    const geometry = new THREE.SphereGeometry(0.1, 8, 8); // Reduzida resolução
+                    const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+                    const dot = new THREE.Mesh(geometry, material);
+                    
+                    dot.userData = {
+                        progress: i / dotCount,
+                        speed: 0.2 + Math.random() * 0.3
+                    };
+                    
+                    this.scene.add(dot);
+                    this.movingDots.push(dot);
+                }
             }
             
-            // Iniciar animação
-            animate();
+            addMouseInteraction() {
+                window.addEventListener('mousemove', (event) => {
+                    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                    
+                    // Update target camera position based on mouse
+                    this.targetCameraPosition.x = this.mouse.x * 1.5; // Reduzido movimento
+                    this.targetCameraPosition.y = this.mouse.y * 0.8; // Reduzido movimento
+                });
+            }
             
-            // Responsividade
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                const delta = this.clock.getDelta();
+                const time = this.clock.getElapsedTime();
+                
+                // Rotate globe
+                if (this.globe) {
+                    this.globe.rotation.y += 0.0005; // Mais lento
+                }
+                
+                // Rotate particles (mais lento)
+                if (this.particleSystem) {
+                    this.particleSystem.rotation.y += 0.0003; // Mais lento
+                    this.particleSystem.rotation.x = Math.sin(time * 0.1) * 0.05; // Reduzido movimento
+                }
+                
+                // Animate moving dots
+                if (this.movingDots) {
+                    this.movingDots.forEach(dot => {
+                        dot.userData.progress += dot.userData.speed * delta * 0.8; // Mais lento
+                        if (dot.userData.progress > 1) dot.userData.progress = 0;
+                        
+                        const point = new THREE.CatmullRomCurve3([
+                            new THREE.Vector3(-2, 1, 2),
+                            new THREE.Vector3(0, 3, 0),
+                            new THREE.Vector3(2, 1, -2)
+                        ]).getPointAt(dot.userData.progress);
+                        
+                        dot.position.copy(point);
+                    });
+                }
+                
+                // Smooth camera movement (mais suave)
+                this.camera.position.x += (this.targetCameraPosition.x - this.camera.position.x) * 0.03; // Mais suave
+                this.camera.position.y += (this.targetCameraPosition.y - this.camera.position.y) * 0.03; // Mais suave
+                this.camera.lookAt(this.scene.position);
+                
+                this.renderer.render(this.scene, this.camera);
+            }
             
-            console.log('Three.js iniciado com sucesso!');
+            handleResize() {
+                window.addEventListener('resize', () => {
+                    this.camera.aspect = window.innerWidth / window.innerHeight;
+                    this.camera.updateProjectionMatrix();
+                    this.renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
         }
         
         // ============================================
-        // 2. ANIMAÇÕES GSAP PARA A PÁGINA
+        // 2. ANIMAÇÕES GSAP AVANÇADAS
         // ============================================
         
-        function initAnimations() {
-            console.log('Iniciando animações GSAP...');
+        class PageAnimations {
+            constructor() {
+                this.init();
+                this.setupScrollAnimations();
+                this.setupHoverEffects();
+                this.setupFAQ();
+                this.setupNavigation();
+            }
             
-            // Configurar ScrollTrigger
-            gsap.registerPlugin(ScrollTrigger);
+            init() {
+                gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+                
+                // Set initial states
+                gsap.set('.fade-in', { opacity: 0, y: 30 });
+                
+                // Animate hero elements
+                this.animateHero();
+            }
             
-            // Animar elementos quando entrarem na tela
-            gsap.utils.toArray('.card, .module, .hero-content, .faq-item').forEach(element => {
-                gsap.from(element, {
-                    scrollTrigger: {
-                        trigger: element,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 50,
+            animateHero() {
+                const tl = gsap.timeline();
+                
+                tl.from('.hero-badge', {
+                    duration: 1,
+                    y: -30,
                     opacity: 0,
-                    duration: 1,
-                    ease: 'power3.out'
-                });
-            });
-            
-            // Animar stats do hero
-            gsap.from('.hero-badge', {
-                duration: 1,
-                y: -30,
-                opacity: 0,
-                ease: 'back.out(1.7)'
-            });
-            
-            // Animar título do hero
-            gsap.from('.hero-title', {
-                duration: 1.2,
-                y: 60,
-                opacity: 0,
-                delay: 0.2,
-                ease: 'power3.out'
-            });
-            
-            // Animar subtítulo e botão
-            gsap.from('.hero-subtitle', {
-                duration: 1,
-                y: 40,
-                opacity: 0,
-                delay: 0.4,
-                ease: 'power3.out'
-            });
-            
-            gsap.from('.hero-button', {
-                duration: 1,
-                y: 40,
-                opacity: 0,
-                delay: 0.6,
-                ease: 'power3.out'
-            });
-            
-            // Animar títulos das seções
-            document.querySelectorAll('.section-title').forEach(title => {
-                gsap.from(title, {
-                    scrollTrigger: {
-                        trigger: title,
-                        start: 'top 90%',
-                        toggleActions: 'play none none none'
-                    },
-                    duration: 1,
-                    y: 50,
+                    ease: 'back.out(1.7)'
+                })
+                .from('.hero-title', {
+                    duration: 1.5,
+                    y: 60,
                     opacity: 0,
                     ease: 'power3.out'
-                });
-            });
+                }, '-=0.5')
+                .from('.hero-subtitle', {
+                    duration: 1,
+                    y: 40,
+                    opacity: 0,
+                    ease: 'power3.out'
+                }, '-=0.8')
+                .from('.hero-button-group', {
+                    duration: 1,
+                    y: 40,
+                    opacity: 0,
+                    ease: 'power3.out'
+                }, '-=0.6')
+                .from('.hero-stats', {
+                    duration: 1,
+                    y: 40,
+                    opacity: 0,
+                    ease: 'power3.out'
+                }, '-=0.4');
+            }
             
-            // Efeito hover nos cards
-            document.querySelectorAll('.card, .module').forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    gsap.to(element, {
-                        scale: 1.02,
-                        duration: 0.3,
-                        ease: 'power2.out'
+            setupScrollAnimations() {
+                // Animate cards on scroll
+                gsap.utils.toArray('.card, .module').forEach((element, i) => {
+                    gsap.from(element, {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        delay: i * 0.1,
+                        ease: 'power3.out'
                     });
                 });
                 
-                element.addEventListener('mouseleave', () => {
-                    gsap.to(element, {
-                        scale: 1,
-                        duration: 0.3,
-                        ease: 'power2.out'
+                // Animate section titles
+                gsap.utils.toArray('.section-title').forEach(title => {
+                    gsap.from(title, {
+                        scrollTrigger: {
+                            trigger: title,
+                            start: 'top 90%'
+                        },
+                        duration: 1.2,
+                        y: 60,
+                        opacity: 0,
+                        ease: 'power3.out'
                     });
                 });
-            });
+                
+                // Parallax effect for CTA
+                gsap.to('.cta-section', {
+                    scrollTrigger: {
+                        trigger: '.cta-section',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    },
+                    y: -80, // Reduzido
+                    ease: 'none'
+                });
+            }
             
-            console.log('Animações GSAP configuradas!');
-        }
-        
-        // ============================================
-        // 3. FUNCIONALIDADES DA NAVEGAÇÃO
-        // ============================================
-        
-        function initNavigation() {
-            console.log('Iniciando navegação...');
-            
-            // Smooth scroll para links internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
+            setupHoverEffects() {
+                // Card hover effects
+                document.querySelectorAll('.card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        gsap.to(card, {
+                            scale: 1.03,
+                            duration: 0.4,
+                            ease: 'power2.out'
                         });
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, {
+                            scale: 1,
+                            duration: 0.4,
+                            ease: 'power2.out'
+                        });
+                    });
+                });
+                
+                // Button hover effects
+                document.querySelectorAll('.hero-button, .cta-button').forEach(button => {
+                    button.addEventListener('mouseenter', () => {
+                        gsap.to(button, {
+                            scale: 1.05,
+                            duration: 0.3
+                        });
+                    });
+                    
+                    button.addEventListener('mouseleave', () => {
+                        gsap.to(button, {
+                            scale: 1,
+                            duration: 0.3
+                        });
+                    });
+                });
+            }
+            
+            setupFAQ() {
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+                    const icon = question.querySelector('i');
+                    
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        
+                        // Close all other items
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                                gsap.to(otherItem.querySelector('.faq-answer'), {
+                                    maxHeight: 0,
+                                    duration: 0.4,
+                                    ease: 'power2.inOut'
+                                });
+                                otherItem.querySelector('i').style.transform = 'rotate(0deg)';
+                            }
+                        });
+                        
+                        // Toggle current item
+                        if (!isActive) {
+                            item.classList.add('active');
+                            gsap.to(answer, {
+                                maxHeight: answer.scrollHeight + 'px',
+                                duration: 0.4,
+                                ease: 'power2.inOut'
+                            });
+                            icon.style.transform = 'rotate(45deg)';
+                        } else {
+                            item.classList.remove('active');
+                            gsap.to(answer, {
+                                maxHeight: 0,
+                                duration: 0.4,
+                                ease: 'power2.inOut'
+                            });
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            }
+            
+            setupNavigation() {
+                // Smooth scroll
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        const targetId = anchor.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            gsap.to(window, {
+                                duration: 1,
+                                scrollTo: {
+                                    y: targetElement,
+                                    offsetY: 80
+                                },
+                                ease: 'power3.inOut'
+                            });
+                        }
+                    });
+                });
+                
+                // Navbar scroll effect
+                const navbar = document.querySelector('.navbar');
+                
+                ScrollTrigger.create({
+                    start: 100,
+                    onUpdate: (self) => {
+                        if (self.progress > 0) {
+                            navbar.classList.add('scrolled');
+                        } else {
+                            navbar.classList.remove('scrolled');
+                        }
                     }
                 });
-            });
-            
-            // Mudar navbar no scroll
-            const navbar = document.querySelector('.navbar');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    navbar.style.background = 'rgba(15, 15, 26, 0.95)';
-                    navbar.style.padding = '1rem 5%';
-                } else {
-                    navbar.style.background = 'rgba(15, 15, 26, 0.9)';
-                    navbar.style.padding = '1.5rem 5%';
-                }
-            });
-            
-            // Botão CTA com efeito especial
-            const ctaButtons = document.querySelectorAll('.hero-button');
-            ctaButtons.forEach(button => {
-                button.addEventListener('mouseenter', () => {
-                    gsap.to(button, {
-                        scale: 1.05,
-                        boxShadow: '0 25px 50px rgba(139, 92, 246, 0.4)',
-                        duration: 0.3
-                    });
-                });
-                
-                button.addEventListener('mouseleave', () => {
-                    gsap.to(button, {
-                        scale: 1,
-                        boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)',
-                        duration: 0.3
-                    });
-                });
-            });
-            
-            console.log('Navegação configurada!');
+            }
         }
         
         // ============================================
-        // 4. INICIALIZAR TUDO QUANDO A PÁGINA CARREGAR
+        // 3. INICIALIZAÇÃO DA PÁGINA
         // ============================================
         
-        window.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM carregado. Inicializando...');
+        class PageInitializer {
+            constructor() {
+                this.init();
+            }
             
-            try {
-                initThreeJS();
-                initAnimations();
-                initNavigation();
-                
-                console.log('✅ Tudo funcionando!');
-                
-                // Mensagem de boas-vindas
-                console.log('%c✨ Minha Jornada USA 2026 ✨', 'color: #8B5CF6; font-size: 18px; font-weight: bold;');
-                console.log('%cDesign moderno + Conteúdo original', 'color: #94A3B8;');
-                
-            } catch (error) {
-                console.error('❌ Erro ao inicializar:', error);
-                
-                // Fallback se Three.js falhar
+            init() {
+                // Initialize when DOM is loaded
+                document.addEventListener('DOMContentLoaded', () => {
+                    console.log('🚀 Inicializando Minha Jornada USA 2026');
+                    
+                    try {
+                        // Initialize 3D scene
+                        this.scene3D = new Scene3D();
+                        
+                        // Initialize animations
+                        this.animations = new PageAnimations();
+                        
+                        // Add loading animation
+                        this.hideLoader();
+                        
+                        console.log('✅ Tudo funcionando perfeitamente!');
+                        console.log('✨ Partículas reduzidas para melhor performance');
+                        
+                        // Welcome message
+                        this.showWelcomeMessage();
+                        
+                    } catch (error) {
+                        console.error('❌ Erro durante inicialização:', error);
+                        this.handleInitError();
+                    }
+                });
+            }
+            
+            hideLoader() {
+                // Simulate loading completion
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 500);
+            }
+            
+            handleInitError() {
+                // Fallback if Three.js fails
                 const canvas = document.getElementById('threejs-canvas');
                 if (canvas) {
                     canvas.style.display = 'none';
                 }
                 
-                // Ainda mostrar o conteúdo principal
+                // Ensure content is visible
                 document.body.style.opacity = '1';
             }
-        });
+            
+            showWelcomeMessage() {
+                console.log('%c✨ Minha Jornada USA 2026 ✨', 'color: #8B5CF6; font-size: 20px; font-weight: bold;');
+                console.log('%cDesign Moderno + Performance Otimizada', 'color: #94A3B8; font-size: 14px;');
+                console.log('%cPartículas reduzidas para melhor experiência!', 'color: #10B981; font-weight: bold;');
+            }
+        }
         
-        // Fallback para garantir que o conteúdo apareça
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '1';
-        });
+        // Start everything
+        new PageInitializer();
         
     </script>
 </body>
